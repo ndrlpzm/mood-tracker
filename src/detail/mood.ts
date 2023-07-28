@@ -1,4 +1,4 @@
-class Mood{
+export class Mood{
 	value: number;
 	date: Date;
 	comment: string;

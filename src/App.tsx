@@ -1,16 +1,16 @@
 import React,{ useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import MoodDetail from './detail/MoodDetail';
+import { Mood } from './detail/mood';
 
 function App() {
-  const [moods, setMoods] = useState([]);
+  const [mood, setMood] = useState(new Mood());
   return (
     <div className="App">
       <header className="App-header">
       </header>
       <main>
-        <MoodDetail></MoodDetail>
+        <MoodDetail mood={mood} setMood={setMood}></MoodDetail>
       </main>
     </div>
   );

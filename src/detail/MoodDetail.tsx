@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Mood } from "./mood";
 interface MoodInput{
-	mood:Mood,
-	setMood: React.Dispatch<React.SetStateAction<Mood>>
+	moodList:Mood[],
+	setMoodList: React.Dispatch<React.SetStateAction<Mood[]>>
 }
-function MoodDetail({mood, setMood}: MoodInput){
+function MoodDetail({moodList, setMoodList}: MoodInput){
+	const [mood, setMood] = useState(new Mood());
 	const handleClickRating = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		setMood({
@@ -12,8 +13,12 @@ function MoodDetail({mood, setMood}: MoodInput){
 				value: parseInt(e.currentTarget.value)
 			});
 		// Fix parse int, remove when value is actually a number
-		console.log(mood);
 	  };
+	  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+		  e.preventDefault();
+		  setMoodList([...moodList, mood]);
+		  console.log(moodList);
+		};
 
 	return(
 	<article>
@@ -24,7 +29,7 @@ function MoodDetail({mood, setMood}: MoodInput){
 			<button onClick={handleClickRating} value={4}>4</button>
 			<button onClick={handleClickRating} value={5}>5</button>
 		</div>
-		<button>Save</button>
+		<button onClick={handleSubmit}>Save</button>
 		</article>
 		);
 }

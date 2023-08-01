@@ -4,13 +4,13 @@ import MoodDetail from './detail/MoodDetail';
 import { Mood } from './detail/mood';
 
 function App() {
-  const [mood, setMood] = useState(new Mood());
+  const [moodList, setMoodList] = useState(new Array<Mood>());
   return (
     <div className="App">
       <header className="App-header">
       </header>
       <main>
-        <MoodDetail mood={mood} setMood={setMood}></MoodDetail>
+        <MoodDetail moodList={moodList} setMoodList={setMoodList}></MoodDetail>
       </main>
     </div>
   );

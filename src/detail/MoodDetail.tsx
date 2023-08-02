@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Mood } from "./mood";
+import ValueContainer from "./ValueContainer";
 interface MoodInput {
   moodList: Mood[];
   setMoodList: React.Dispatch<React.SetStateAction<Mood[]>>;
 }
 function MoodDetail({ moodList, setMoodList }: MoodInput) {
   const [mood, setMood] = useState(new Mood());
-  const handleClickRating = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const [moodValue, setMoodValue] = useState(0);
+  useEffect(() => {
     setMood({
       ...mood,
-      value: parseInt(e.currentTarget.value),
-      // Fix parse int, remove when value is actually a number
+      value: moodValue,
     });
-  };
+  }, [moodValue]);
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     setMoodList([...moodList, mood]);
@@ -26,15 +26,7 @@ function MoodDetail({ moodList, setMoodList }: MoodInput) {
   return (
     <article>
       <form onSubmit={handleSubmit}>
-        <div>
-          {ratings.map(function (i) {
-            return (
-              <button onClick={handleClickRating} key={i} value={i}>
-                {i}
-              </button>
-            );
-          })}
-        </div>
+        <ValueContainer moodValue={moodValue} setMoodValue={setMoodValue} />
         <input
           type="text"
           onChange={(e) => {

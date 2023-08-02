@@ -11,23 +11,24 @@ function MoodDetail({moodList, setMoodList}: MoodInput){
 		setMood({
 				...mood,
 				value: parseInt(e.currentTarget.value)
+				// Fix parse int, remove when value is actually a number
 			});
-		// Fix parse int, remove when value is actually a number
-	  };
-	  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-		  e.preventDefault();
-		  setMoodList([...moodList, mood]);
-		  console.log(moodList);
-		};
-
+	};
+	const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		setMoodList([...moodList, mood]);
+		console.log(moodList);
+	};
+	const ratings: number[] = [];
+	for (let i = 1; i < 6; i++) {
+		ratings.push(i)
+	};
 	return(
 	<article>
 		<div>
-			<button onClick={handleClickRating} value={1}>1</button>
-			<button onClick={handleClickRating} value={2}>2</button>
-			<button onClick={handleClickRating} value={3}>3</button>
-			<button onClick={handleClickRating} value={4}>4</button>
-			<button onClick={handleClickRating} value={5}>5</button>
+			{ratings.map(function (i) {
+				return <button onClick={handleClickRating} key={i} value={i}>{i}</button>;
+			})}
 		</div>
 		<button onClick={handleSubmit}>Save</button>
 		</article>

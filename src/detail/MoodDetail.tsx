@@ -35,6 +35,15 @@ function MoodDetail({ moodList, setMoodList }: MoodInput) {
             );
           })}
         </div>
+        <input
+          type="text"
+          onChange={(e) => {
+            setMood({
+              ...mood,
+              comment: e.currentTarget.value,
+            });
+          }}
+        />
         <input type="submit" value="Save" />
       </form>
     </article>

@@ -7,12 +7,9 @@ function ValueContainer({ moodValue, setMoodValue }: ValueContainerInput) {
   const handleClickRating = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
       setMoodValue(parseInt(e.currentTarget.value));
-      // Fix parse int, remove when value is actually a number
+      // Remove parseint, try using valueAsNumber by changing the htmlelement used
   };
-  const ratings: number[] = [];
-  for (let i = 1; i < 6; i++) {
-    ratings.push(i);
-  }
+  const ratings: number[] = [1,2,3,4,5,6];
   return (
     <div>
       {ratings.map(function (i) {

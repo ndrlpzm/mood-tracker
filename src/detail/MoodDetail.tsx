@@ -19,10 +19,6 @@ function MoodDetail({ moodList, setMoodList }: MoodInput) {
     setMoodList([...moodList, mood]);
     console.log(moodList);
   };
-  const ratings: number[] = [];
-  for (let i = 1; i < 6; i++) {
-    ratings.push(i);
-  }
   return (
     <article>
       <form onSubmit={handleSubmit}>

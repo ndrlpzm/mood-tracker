@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 interface ValueContainerInput {
   moodValue: number;
   setMoodValue:  React.Dispatch<React.SetStateAction<number>>;

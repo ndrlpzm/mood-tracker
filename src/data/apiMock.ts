@@ -1,5 +1,8 @@
-export function addMood(){
-	setTimeout(() => {}, 2000);
+import { Mood } from "../detail/mood";
+
+export async function addMood(url:string,  mood:Mood){
+	//setTimeout(() => {}, 2000);
+	console.log(mood);
 }
 export function deleteMood(){
 	setTimeout(() => {}, 2000);

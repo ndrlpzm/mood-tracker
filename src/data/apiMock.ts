@@ -19,7 +19,7 @@ export function returnMoodsByDate(startingDate: Date, endDate: Date) {
 
 const now = new Date();
 function delay(ms: number) {
-  new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 function getDate(addedDays: number) {
   const today = new Date();

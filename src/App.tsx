@@ -14,7 +14,6 @@ function App() {
   );
   useEffect(() => {
     setMoodList(data ?? []);
-    console.log(data);
   }, [data]);
   return (
     <div className="App">

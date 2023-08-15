@@ -1,6 +1,7 @@
 import { Mood } from "../detail/mood";
 
 export async function addMood(url: string, mood: Mood) {
+  console.log("addMood")
   await delay(500);
   var maxIdElement = storedMoodList.reduce((prevMood, curMood) => {
     return (prevMood = prevMood.id > curMood.id ? prevMood : curMood);
@@ -10,21 +11,20 @@ export async function addMood(url: string, mood: Mood) {
   return newMood;
 }
 export function deleteMood(url: string, mood: Mood) {
+  console.log("deleteMood")
   const index = storedMoodList.indexOf(mood);
   storedMoodList = storedMoodList.splice(index, 1);
 }
 export async function returnLatestMoods() {
+  console.log("returnLatestMoods")
   //returns moods ordered by date-time
   await delay(1500);
   const orderDatesDesc = (prevMood: Mood, curMood: Mood) => {
     return prevMood.date.valueOf() - curMood.date.valueOf();
   };
-  const orderedMoodList = storedMoodList.sort(orderDatesDesc);
+  const orderedMoodList = storedMoodList.map(x=>x);
+  orderedMoodList.sort(orderDatesDesc);
   return orderedMoodList;
-}
-export function returnMoodsByDate(startingDate: Date, endDate: Date) {
-  //returns moods within a date range
-  setTimeout(() => {}, 2000);
 }
 /*------------------------------------------------------------------- */
 const now = new Date();

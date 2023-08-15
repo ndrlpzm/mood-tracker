@@ -3,22 +3,31 @@ import { Mood } from "./mood";
 import ValueContainer from "./ValueContainer";
 import useSWRMutation from "swr/mutation";
 import { addMood } from "../data/apiMock";
+import { MoodAction } from "../data/moodReducer";
 interface MoodInput {
   moodList: Mood[];
-  setMoodList: React.Dispatch<React.SetStateAction<Mood[]>>;
+  dispatchMoods: React.Dispatch<MoodAction>;
 }
-function MoodDetail({ moodList, setMoodList }: MoodInput) {
+function MoodDetail({ moodList, dispatchMoods }: MoodInput) {
   const [mood, setMood] = useState(new Mood());
   const [moodValue, setMoodValue] = useState(0);
-  const { trigger: triggerAddMood } = useSWRMutation(
+  const { trigger: triggerAddMood, data: returnData } = useSWRMutation(
     "../data/apiMock.ts",
-    (url) => addMood(url, mood),
-    {
-      onSuccess: () => {
-        setMoodList([...moodList, mood]);
-      },
-    }
+    (url) => addMood(url, mood)
   );
+  useEffect(() => {
+    if(!returnData) return;
+    setMood({
+      ...mood,
+      id: returnData.id,
+    });
+    dispatchMoods({
+      type: 'add',
+      mood: returnData,
+      moodIndex: -1,
+      newList:[]
+    });
+  }, [returnData]);
 
   useEffect(() => {
     setMood({
@@ -30,6 +39,7 @@ function MoodDetail({ moodList, setMoodList }: MoodInput) {
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     triggerAddMood();
+    console.log(moodList)
   };
   return (
     <article>

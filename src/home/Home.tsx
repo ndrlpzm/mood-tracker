@@ -8,6 +8,9 @@ interface HomeInput {
 }
 function Home({ moodList, isLoading }: HomeInput) {
   const formattedData = () => {
+    
+  console.log("formattedData")
+  console.log(moodList)
     var prevDate: Date;
     const formattedElements = moodList.map((mood) => {
       const art: JSX.Element = (

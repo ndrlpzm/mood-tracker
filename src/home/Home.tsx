@@ -39,6 +39,7 @@ function Home({ moodList, isLoading }: HomeInput) {
       ) : (
         <>{formattedData()}</>
       )}
+      <button>+</button>
     </>
   );
 }

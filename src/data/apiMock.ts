@@ -1,7 +1,8 @@
-import { Mood } from "../detail/mood";
+import { Mood } from "./classes/mood";
+import { Tag } from "./classes/tag";
 
 export async function addMood(url: string, mood: Mood) {
-  console.log("addMood")
+  console.log("addMood mock");
   await delay(500);
   var maxIdElement = storedMoodList.reduce((prevMood, curMood) => {
     return (prevMood = prevMood.id > curMood.id ? prevMood : curMood);
@@ -11,12 +12,12 @@ export async function addMood(url: string, mood: Mood) {
   return newMood;
 }
 export function deleteMood(url: string, mood: Mood) {
-  console.log("deleteMood")
+  console.log("deleteMood mock");
   const index = storedMoodList.indexOf(mood);
   storedMoodList = storedMoodList.splice(index, 1);
 }
 export async function returnLatestMoods() {
-  console.log("returnLatestMoods")
+  console.log("returnLatestMoods mock");
   //returns moods ordered by date-time
   await delay(1500);
   const orderDatesDesc = (prevMood: Mood, curMood: Mood) => {
@@ -26,6 +27,10 @@ export async function returnLatestMoods() {
   orderedMoodList.sort(orderDatesDesc);
   return orderedMoodList;
 }
+export function  returnAvailableTags(){
+  console.log("returnAvailableTags mock");
+  return storedTagList;
+}
 /*------------------------------------------------------------------- */
 const now = new Date();
 var storedMoodList: Mood[] = [
@@ -34,6 +39,13 @@ var storedMoodList: Mood[] = [
   { id: 3, value: 3, date: getDate(2), comment: "Self care day" },
   { id: 4, value: 5, date: getDate(4), comment: "Went on a trip" },
   { id: 5, value: 1, date: getDate(5), comment: "Got hurt" },
+];
+var storedTagList: Tag[] = [
+  { id: 1, value: "Sad", color: "" },
+  { id: 2, value: "Angry", color: "S"  },
+  { id: 3, value: "Anxious", color: ""  },
+  { id: 4, value: "Worried", color: ""  },
+  { id: 5, value: "Tired", color: ""  },
 ];
 
 function delay(ms: number) {

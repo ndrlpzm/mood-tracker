@@ -1,4 +1,4 @@
-import { Mood } from "../detail/mood";
+import { Mood } from "./classes/mood";
 export type MoodActionType="add" | "delete" | "replace";
 export class MoodAction{
 	constructor(

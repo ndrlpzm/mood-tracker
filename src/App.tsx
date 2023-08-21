@@ -4,7 +4,7 @@ import { returnLatestMoods } from "./data/apiMock";
 import "./App.css";
 import MoodDetail from "./detail/MoodDetail";
 import Home from "./home/Home";
-import { Mood } from "./detail/mood";
+import { Mood } from "./data/classes/mood";
 import moodsReducer from "./data/moodReducer";
 import { Routes, Route, Link } from "react-router-dom";
 
@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     dispatch({
       type: "replace",
-      mood: new Mood(),
+      mood: new Mood(-1,0,new Date(),""),
       moodIndex: -1,
       newList: data ?? [],
     });

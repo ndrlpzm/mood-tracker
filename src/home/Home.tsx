@@ -1,12 +1,14 @@
 import ClipLoader from "react-spinners/ClipLoader";
-import { Mood } from "../detail/mood";
+import { Mood } from "../data/classes/mood";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface HomeInput {
   moodList: Mood[];
   isLoading: boolean;
 }
 function Home({ moodList, isLoading }: HomeInput) {
+  const navigate=useNavigate();
   const formattedData = () => {
     
   console.log("formattedData")
@@ -39,7 +41,7 @@ function Home({ moodList, isLoading }: HomeInput) {
       ) : (
         <>{formattedData()}</>
       )}
-      <button>+</button>
+      <button onClick={()=>{navigate("/mood")}}>+</button>
     </>
   );
 }

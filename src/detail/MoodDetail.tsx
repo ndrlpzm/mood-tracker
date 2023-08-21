@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Mood } from "./mood";
+import { Mood } from "../data/classes/mood";
 import ValueContainer from "./ValueContainer";
 import useSWRMutation from "swr/mutation";
 import { addMood } from "../data/apiMock";
@@ -9,7 +9,7 @@ interface MoodInput {
   dispatchMoods: React.Dispatch<MoodAction>;
 }
 function MoodDetail({ moodList, dispatchMoods }: MoodInput) {
-  const [mood, setMood] = useState(new Mood());
+  const [mood, setMood] = useState(new Mood(-1,0,new Date(),""));
   const [moodValue, setMoodValue] = useState(0);
   const { trigger: triggerAddMood, data: returnData } = useSWRMutation(
     "../data/apiMock.ts",

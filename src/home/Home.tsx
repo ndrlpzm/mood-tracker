@@ -2,6 +2,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { Mood } from "../data/classes/mood";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import TagDisplay from "../detail/TagDisplay";
 
 interface HomeInput {
   moodList: Mood[];
@@ -18,6 +19,7 @@ function Home({ moodList, isLoading }: HomeInput) {
       const art: JSX.Element = (
         <article key={mood.id}>
           <div>{mood.value}</div>
+          <div><TagDisplay tagList={mood.tags}/></div>
           <div>{mood.comment}</div>
         </article>
       );

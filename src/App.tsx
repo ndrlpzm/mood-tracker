@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     dispatch({
       type: "replace",
-      mood: new Mood(-1,0,new Date(),""),
+      mood: new Mood(-1,0,new Date(),"",[]),
       moodIndex: -1,
       newList: data ?? [],
     });

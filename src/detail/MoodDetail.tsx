@@ -4,12 +4,13 @@ import ValueContainer from "./ValueContainer";
 import useSWRMutation from "swr/mutation";
 import { addMood } from "../data/apiMock";
 import { MoodAction } from "../data/moodReducer";
+import TagDisplay from "./TagDisplay";
 interface MoodInput {
   moodList: Mood[];
   dispatchMoods: React.Dispatch<MoodAction>;
 }
 function MoodDetail({ moodList, dispatchMoods }: MoodInput) {
-  const [mood, setMood] = useState(new Mood(-1,0,new Date(),""));
+  const [mood, setMood] = useState(new Mood(-1,0,new Date(),"", []));
   const [moodValue, setMoodValue] = useState(0);
   const { trigger: triggerAddMood, data: returnData } = useSWRMutation(
     "../data/apiMock.ts",
@@ -45,6 +46,7 @@ function MoodDetail({ moodList, dispatchMoods }: MoodInput) {
     <article>
       <form onSubmit={handleSubmit}>
         <ValueContainer moodValue={moodValue} setMoodValue={setMoodValue} />
+        <TagDisplay tagList={mood.tags}></TagDisplay>
         <input
           type="text"
           onChange={(e) => {

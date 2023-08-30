@@ -16,11 +16,18 @@ function Home({ moodList, isLoading }: HomeInput) {
   console.log(moodList)
     var prevDate: Date;
     const formattedElements = moodList.map((mood) => {
+      var commentIcon: JSX.Element;
+      if(mood.comment.length>0){
+        commentIcon= <div>...</div>;
+      }
+      else{
+        commentIcon=<></>;
+      }
       const art: JSX.Element = (
         <article key={mood.id}>
           <div>{mood.value}</div>
           <div><TagDisplay tagList={mood.tags}/></div>
-          <div>{mood.comment}</div>
+          {commentIcon}
         </article>
       );
       if (prevDate !== mood.date) {

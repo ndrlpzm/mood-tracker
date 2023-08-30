@@ -36,9 +36,9 @@ const now = new Date();
 var storedMoodList: Mood[] = [
   { id: 1, value: 4, date: now, comment: "Great weather", tags:[{ id: 1, value: "Sad", color: "blue" }] },
   { id: 2, value: 2, date: getDate(1), comment: "Received bad news", tags:[{ id: 2, value: "Angry", color: "red"  }]  },
-  { id: 3, value: 3, date: getDate(2), comment: "Self care day", tags:[]  },
-  { id: 4, value: 5, date: getDate(4), comment: "Went on a trip", tags:[]  },
-  { id: 5, value: 1, date: getDate(5), comment: "Got hurt", tags:[{ id: 4, value: "Frustrated", color: "orange"  },
+  { id: 3, value: 3, date: getDate(2), comment: "", tags:[]  },
+  { id: 4, value: 5, date: getDate(2), comment: "Went on a trip", tags:[]  },
+  { id: 5, value: 1, date: getDate(4), comment: "Got hurt", tags:[{ id: 4, value: "Frustrated", color: "orange"  },
   { id: 3, value: "Anxious", color: "green"  }]  },
 ];
 var storedTagList: Tag[] = [

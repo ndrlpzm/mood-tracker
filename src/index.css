@@ -11,3 +11,76 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background-base: hsl(33, 100%, 99%);
+		--background-highlight: hsl(33, 33%, 93%);
+
+		--foreground-base: hsl(36, 100%, 2%);
+		--foreground-highlight: hsl(33, 50%, 20%);
+
+		--accent-base: hsl(36, 70%, 50%);
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--background-base: hsl(33, 100%, 99%);
+		--background-highlight: hsl(33, 33%, 93%);
+
+		--foreground-base: hsl(36, 100%, 2%);
+		--foreground-highlight: hsl(33, 50%, 20%);
+
+		--accent-base: hsl(36, 70%, 50%);
+	}
+}
+
+/* Follows material guideliens on window classes */
+/* --- Compact ---------------------------------------------------------------*/
+@media screen and (width < 599px) {
+
+	body {
+		margin: 16px 8px;
+	}
+
+	svg {
+		width: 100%;
+	}
+	
+	.flexGap {
+		gap: 8px;
+	}
+
+	.displayText {
+		font-family: Roboto;
+		font-weight: 400;
+		line-height: 2.75rem;
+		font-size: 2.25rem;
+	}
+	.titleText {
+		font-family: Roboto;
+		font-weight: 400;
+		line-height: 1.25rem;
+		font-size: 0.875rem;
+	}
+	.bodyText {
+		font-family: Roboto;
+		font-weight: 400;
+		line-height: 1rem;
+		font-size: 0.75rem;
+	}
+	.labelText {
+		font-family: Roboto;
+		font-weight: 500;
+		line-height: 1rem;
+		font-size: 0.6875rem;
+	}
+}
+
+/* --- Medium ----------------------------------------------------------------*/
+@media screen and (600px < width < 839px) {
+}
+
+/* --- Expanded --------------------------------------------------------------*/
+@media screen and (600px < width < 840px) {
+}

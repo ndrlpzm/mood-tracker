@@ -14,7 +14,7 @@ function Home({ moodList, isLoading }: HomeInput) {
     
   console.log("formattedData")
   console.log(moodList)
-    var prevDate: Date;
+    var prevDate: string;
     const formattedElements = moodList.map((mood) => {
       var commentIcon: JSX.Element;
       if(mood.comment.length>0){
@@ -30,7 +30,8 @@ function Home({ moodList, isLoading }: HomeInput) {
           {commentIcon}
         </article>
       );
-      if (prevDate !== mood.date) {
+      if (prevDate !== mood.date.toLocaleDateString()) {
+        prevDate=mood.date.toLocaleDateString();
         const header: JSX.Element = <div><h3>{mood.date.toLocaleDateString()}</h3></div>;
         return [header, art];
       } else {

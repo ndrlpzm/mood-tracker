@@ -1,0 +1,50 @@
+.home {
+	text-align: center;
+}
+h3 {
+  font-size: 1em;
+  margin:0;
+}
+.date-container {
+  background-color: var(--accent-shadow);
+  color: var(--foreground-contrast);
+}
+article {
+  margin: auto;
+  display: flex;
+  flex: 0 0 100%;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 6px 3px;
+  border-bottom: 1px solid var(--accent-shadow);
+  background-color: var(--background-highlight);
+}
+article div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 8px;
+}
+.mood-value-container{
+	padding:5px;
+	border-radius: 50%;
+}
+.tag-container{
+	align-items: flex-start;
+}
+.new-mood-button{    
+	position: fixed;
+  right: 16px;
+  bottom: 16px;
+}
+/* --- Compact ---------------------------------------------------------------*/
+@media screen and (width < 599px) {
+}
+
+/* --- Medium ----------------------------------------------------------------*/
+@media screen and (600px < width < 839px) {
+}
+
+/* --- Expanded --------------------------------------------------------------*/
+@media screen and (600px < width < 840px) {
+}

@@ -24,40 +24,60 @@ code {
   width: 0.5em;
   height: 0.5em;
   border-radius: 0.5em;
-  margin-right:4px;
+  margin-right: 4px;
 }
 
-.fab-large{    
-	font-size: 3em;
-	padding: 0.7em 1em;
-	border-radius: 0.5em;
-	box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.25);
-	border:none;
+.fab-large {
+  color: var(--accent-base);
+  font-size: 3em;
+  padding: 0.7em 1em;
+  border-radius: 0.5em;
+  box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.25);
+  border: none;
+}
+.fab-large:hover {
+  background-color: var(--accent-base);
+  color: var(--background-base);
+  box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.25);
+}
+.filled-button {
+  background-color: var(--accent-base);
+  color: var(--foreground-contrast);
+  font-size: 1.5em;
+  padding: 6px auto;
+  border-radius: 0.5em;
+  border: none;
+}
+.filled-button:hover {
+  background-color: var(--accent-highlight);
+}
+.filled-button:active {
+  background-color: var(--accent-shadow);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background-base: hsl(33, 100%, 99%);
-    --background-highlight: #EFDCF8;
+    --background-highlight: #efdcf8;
 
     --foreground-base: hsl(36, 100%, 2%);
     --foreground-highlight: hsl(33, 50%, 20%);
 
-    --accent-base: #9258AE;
+    --accent-base: #9258ae;
   }
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --background-base: #EFE8F2;
-    --background-highlight: #EFDCF8;
+    --background-base: #efe8f2;
+    --background-highlight: #efdcf8;
 
-    --foreground-base: #221C24;
-    --foreground-contrast: #EFE8F2;
+    --foreground-base: #221c24;
+    --foreground-contrast: #efe8f2;
 
-    --accent-base: #9258AE;
-    --accent-highlight: #AC74C8;
-    --accent-shadow: #6D2690;
+    --accent-base: #9258ae;
+    --accent-highlight: #ac74c8;
+    --accent-shadow: #6d2690;
   }
 }
 

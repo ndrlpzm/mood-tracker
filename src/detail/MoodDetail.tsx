@@ -56,7 +56,7 @@ function MoodDetail({ moodList, dispatchMoods }: MoodInput) {
             });
           }}
         />
-        <input type="submit" value="Save" />
+        <input className="filled-button" type="submit" value="Save" />
       </form>
     </article>
   );

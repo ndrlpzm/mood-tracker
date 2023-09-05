@@ -3,9 +3,7 @@ import { Mood } from "../data/classes/mood";
 import React from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
-import TagDisplay from "../detail/TagDisplay";
-import smileyImage from "../resources/smiling-emoticon-square-face.png";
-import messageImage from "../resources/message.png";
+import HomeArticle from "./HomeArticle";
 
 interface HomeInput {
   moodList: Mood[];
@@ -17,25 +15,8 @@ function Home({ moodList, isLoading }: HomeInput) {
     var colorMappings = retrieveIconColors();
     var prevDate: string;
     const formattedElements = moodList.map((mood) => {
-      //displays an icon if there is a comment
-      var commentIcon: JSX.Element;
-      if (mood.comment.length > 0) {
-        commentIcon = <img src={messageImage}></img>;
-      } else {
-        commentIcon = <></>;
-      }
       const art: JSX.Element = (
-        <article key={mood.id}>
-          <div className="mood-value-container" style={{ backgroundColor: colorMappings.get(mood.value) }}>
-            <img alt={mood.value.toString()} src={smileyImage}></img>
-          </div>
-          <div>
-            <div>
-              <TagDisplay tagList={mood.tags} />
-            </div>
-            {commentIcon}
-          </div>
-        </article>
+        <HomeArticle mood={mood} colorMappings={colorMappings}></HomeArticle>
       );
       if (prevDate !== mood.date.toLocaleDateString()) {
         prevDate = mood.date.toLocaleDateString();

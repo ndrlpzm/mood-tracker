@@ -35,13 +35,4 @@ function HomeArticle({ mood, colorMappings }: HomeArticleInput) {
 	  <>{art}</>
 	);
   }
-  function retrieveIconColors() {
-	const colorIcon = new Map();
-	colorIcon.set(1, "#747CC6");
-	colorIcon.set(2, "#A774C6");
-	colorIcon.set(3, "#C674B4");
-	colorIcon.set(4, "#D76A91");
-	colorIcon.set(5, "#D35D5D");
-	return colorIcon;
-  }
   export default HomeArticle;

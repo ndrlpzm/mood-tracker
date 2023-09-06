@@ -1,22 +1,16 @@
 import React from "react";
+import MoodValueButton from "../common-components/MoodValueButton";
 interface ValueContainerInput {
   moodValue: number;
   setMoodValue:  React.Dispatch<React.SetStateAction<number>>;
 }
 function ValueContainer({ moodValue, setMoodValue }: ValueContainerInput) {
-  const handleClickRating = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-      setMoodValue(parseInt(e.currentTarget.value));
-      // Remove parseint, try using valueAsNumber by changing the htmlelement used
-  };
-  const ratings: number[] = [1,2,3,4,5,6];
+  const ratings: number[] = [1,2,3,4,5];
   return (
     <div>
       {ratings.map(function (i) {
         return (
-          <button onClick={handleClickRating} key={i} value={i}>
-            {i}
-          </button>
+          <MoodValueButton moodValue={i} setMoodValue={setMoodValue} isSelected={moodValue===i}></MoodValueButton>
         );
       })}
     </div>

@@ -1,4 +1,5 @@
 import smileyImage from "../resources/smiling-emoticon-square-face.png";
+import "./CommonComponents.css";
 
 interface MoodValueButtonInput {
   moodValue: number;
@@ -12,7 +13,7 @@ function MoodValueButton({
 }: MoodValueButtonInput) {
   var colorMappings = retrieveIconColors();
   var style:string;
-  isSelected? style="selected": style="unselected";
+  isSelected? style="mood-value selected": style="mood-value unselected";
   const handleClickRating = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setMoodValue(moodValue);

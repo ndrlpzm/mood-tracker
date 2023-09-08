@@ -1,0 +1,7 @@
+.mood-value.selected>div{
+	border: 2px solid black;
+}
+.mood-value{
+	border:none;
+	background:none;
+}

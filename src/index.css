@@ -54,9 +54,6 @@ code {
 .filled-button:active {
   background-color: var(--accent-shadow);
 }
-.selected {
-  background-color: red;
-}
 
 
 @media (prefers-color-scheme: dark) {

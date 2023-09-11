@@ -54,7 +54,11 @@ code {
 .filled-button:active {
   background-color: var(--accent-shadow);
 }
-
+article {
+  margin: auto;
+  padding: 6px 3px;
+  background-color: var(--background-highlight);
+}
 
 @media (prefers-color-scheme: dark) {
   :root {

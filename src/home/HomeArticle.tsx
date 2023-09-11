@@ -2,7 +2,6 @@ import { Mood } from "../data/classes/mood";
 import TagDisplay from "../detail/TagDisplay";
 import smileyImage from "../resources/smiling-emoticon-square-face.png";
 import messageImage from "../resources/message.png";
-import Home from "./Home";
 
 interface HomeArticleInput {
 	mood: Mood;

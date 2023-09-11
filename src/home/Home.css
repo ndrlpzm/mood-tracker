@@ -9,15 +9,12 @@ h3 {
   background-color: var(--accent-shadow);
   color: var(--foreground-contrast);
 }
-article {
-  margin: auto;
+.home article {
   display: flex;
   flex: 0 0 100%;
   flex-flow: row nowrap;
   justify-content: space-between;
-  padding: 6px 3px;
   border-bottom: 1px solid var(--accent-shadow);
-  background-color: var(--background-highlight);
 }
 article div {
   display: flex;

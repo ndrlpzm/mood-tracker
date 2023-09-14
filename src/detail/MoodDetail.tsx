@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./MoodDetail.css";
 
 import ValueContainer from "./ValueContainer";
-import TagDisplay from "./TagDisplay";
 import useSWRMutation from "swr/mutation";
 
 import { Mood } from "../data/classes/mood";
 import { addMood } from "../data/apiMock";
 import { MoodAction } from "../data/moodReducer";
+import TagSelector from "./TagSelector";
 
 interface MoodInput {
   moodList: Mood[];
@@ -49,18 +49,19 @@ function MoodDetail({ moodList, dispatchMoods }: MoodInput) {
   return (
     <article className="mood-detail">
       <form onSubmit={handleSubmit}>
-        <ValueContainer moodValue={moodValue} setMoodValue={setMoodValue} />
-        <TagDisplay tagList={mood.tags}></TagDisplay>
-        <input
-          type="text"
-          onChange={(e) => {
-            setMood({
-              ...mood,
-              comment: e.currentTarget.value,
-            });
-          }}
-        />
-        <input className="filled-button" type="submit" value="Save" />
+          <ValueContainer moodValue={moodValue} setMoodValue={setMoodValue} />
+          <TagSelector tagList={mood.tags}></TagSelector>
+          <textarea
+            id="comment-input"
+            onChange={(e) => {
+              setMood({
+                ...mood,
+                comment: e.currentTarget.value,
+              });
+            }}/>
+          <div className="filled-button-container">
+            <input className="filled-button" type="submit" value="Save" />
+          </div>
       </form>
     </article>
   );

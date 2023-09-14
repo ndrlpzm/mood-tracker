@@ -7,7 +7,7 @@ interface ValueContainerInput {
 function ValueContainer({ moodValue, setMoodValue }: ValueContainerInput) {
   const ratings: number[] = [1,2,3,4,5];
   return (
-    <div>
+    <div id="value-container">
       {ratings.map(function (i) {
         return (
           <MoodValueButton moodValue={i} setMoodValue={setMoodValue} isSelected={moodValue===i}></MoodValueButton>

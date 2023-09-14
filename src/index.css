@@ -13,6 +13,7 @@ code {
     monospace;
 }
 .tag {
+  display: flex;
   align-items: center;
   column-gap: 4px;
   padding: 2px 10px;
@@ -25,6 +26,15 @@ code {
   height: 0.5em;
   border-radius: 0.5em;
   margin-right: 4px;
+}
+.tag-container{
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  flex-wrap: wrap;
+  flex-grow:1;
+  column-gap: 8px;
+  row-gap: 8px;
 }
 
 .fab-large {
@@ -59,7 +69,6 @@ article {
   padding: 6px 3px;
   background-color: var(--background-highlight);
 }
-
 @media (prefers-color-scheme: dark) {
   :root {
     --background-base: hsl(33, 100%, 99%);
@@ -124,6 +133,17 @@ article {
     font-weight: 500;
     line-height: 1rem;
     font-size: 0.6875rem;
+  }
+  .filled-button-container{
+    background-color: var(--background-base);
+    width:100dvw;
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    text-align: center;
+  }
+  .filled-button{margin: 16px 0;
+    width: 70dvw;
   }
 }
 

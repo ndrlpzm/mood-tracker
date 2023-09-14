@@ -9,25 +9,13 @@ h3 {
   background-color: var(--accent-shadow);
   color: var(--foreground-contrast);
 }
-.home article {
+.home-article {
   display: flex;
-  flex: 0 0 100%;
   flex-flow: row nowrap;
+  column-gap: 8px;
+  align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--accent-shadow);
-}
-article div {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  column-gap: 8px;
-}
-.mood-value-container{
-	padding:5px;
-	border-radius: 50%;
-}
-.tag-container{
-	align-items: flex-start;
 }
 .new-mood-button{    
 	position: fixed;

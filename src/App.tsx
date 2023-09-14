@@ -21,14 +21,16 @@ function App() {
   }, [data]);
   return (
     <div className="App">
-      <nav>
+      {/* <nav>
         <Link to="/" className="nav-item">
           Homepage
         </Link>
         <Link to="/mood" className="nav-item">
           Add new mood
         </Link>
-      </nav>
+      </nav> */}
+      <header className="App-header"></header>
+      <main>
       <Routes>
         <Route
           path="/"
@@ -43,9 +45,7 @@ function App() {
             ></MoodDetail>
           }
         ></Route>
-      </Routes>
-      <header className="App-header"></header>
-      <main></main>
+      </Routes></main>
     </div>
   );
 }

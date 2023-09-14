@@ -19,13 +19,13 @@ function MoodValueButton({
     setMoodValue(moodValue);
   };
   return (
-    <button onClick={handleClickRating} key={moodValue} value={moodValue} className={style}>
-      <div
+    <button onClick={handleClickRating} key={moodValue} value={moodValue} className={style} style={{ backgroundColor: colorMappings.get(moodValue) }}>
+      {/*<div
         className="mood-value-container"
-        style={{ backgroundColor: colorMappings.get(moodValue) }}
+        
       >
-        <img alt={moodValue.toString()} src={smileyImage}></img>
-      </div>
+         <img alt={moodValue.toString()} src={smileyImage}></img> 
+      </div>*/}
     </button>
   );
 }

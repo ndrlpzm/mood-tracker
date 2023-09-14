@@ -15,19 +15,12 @@ function HomeArticle({ mood, colorMappings }: HomeArticleInput) {
 		  commentIcon = <></>;
 		}
 		const art: JSX.Element = (
-		  <article key={mood.id}>
-			<div>
+		  <article className="home-article" key={mood.id}>
 			  <span>{mood.date.toLocaleTimeString()}</span>
-			  <div className="mood-value-container" style={{ backgroundColor: colorMappings.get(mood.value) }}>
-				<img alt={mood.value.toString()} src={smileyImage}></img>
+			  <div className="mood-value" style={{ backgroundColor: colorMappings.get(mood.value) }}>
 			  </div>
-			</div>
-			<div>
-			  <div>
-				<TagDisplay tagList={mood.tags} />
-			  </div>
+			<TagDisplay tagList={mood.tags} />
 			  {commentIcon}
-			</div>
 		  </article>
 		);
 	return (

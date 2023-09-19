@@ -15,7 +15,7 @@ h3 {
   column-gap: 8px;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--accent-shadow);
+  border-bottom: 1px solid var(--accent-2-shadow);
 }
 .new-mood-button{    
 	position: fixed;

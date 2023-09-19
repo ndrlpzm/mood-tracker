@@ -27,9 +27,9 @@ export async function returnLatestMoods() {
   orderedMoodList.sort(orderDatesDesc);
   return orderedMoodList;
 }
-export function  returnAvailableTags(){
+export function  returnAvailableTags(selectedTags:Tag[]){
   console.log("returnAvailableTags mock");
-  return storedTagList;
+  return storedTagList.filter(x => !selectedTags.includes(x));
 }
 /*------------------------------------------------------------------- */
 const now = new Date();

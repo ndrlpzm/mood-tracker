@@ -2,7 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import useSWR from "swr";
 import { returnLatestMoods } from "./data/apiMock";
 import "./App.css";
-import MoodDetail from "./detail/MoodDetail";
+import {MoodDetailWrapper} from "./detail/MoodDetail";
 import Home from "./home/Home";
 import { Mood } from "./data/classes/mood";
 import moodsReducer from "./data/moodReducer";
@@ -37,12 +37,12 @@ function App() {
           element={<Home moodList={moodList} isLoading={isLoading}></Home>}
         ></Route>
         <Route
-          path="/mood"
+          path="/mood/:idParam"
           element={
-            <MoodDetail
-              moodList={moodList}
+            <MoodDetailWrapper
+            id={-1}
               dispatchMoods={dispatch}
-            ></MoodDetail>
+            ></MoodDetailWrapper>
           }
         ></Route>
       </Routes></main>

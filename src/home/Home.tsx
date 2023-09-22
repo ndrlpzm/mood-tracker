@@ -46,7 +46,7 @@ function Home({ moodList, isLoading }: HomeInput) {
       <button
         className="new-mood-button fab-large"
         onClick={() => {
-          navigate("/mood");
+          navigate("/mood/new");
         }}
       >
         +

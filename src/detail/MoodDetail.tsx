@@ -5,21 +5,39 @@ import ValueContainer from "./ValueContainer";
 import useSWRMutation from "swr/mutation";
 
 import { Mood } from "../data/classes/mood";
-import { addMood } from "../data/apiMock";
+import { addMood, retrieveMood } from "../data/apiMock";
 import { MoodAction } from "../data/moodReducer";
 import TagSelector from "./TagSelector";
+import { useParams } from "react-router-dom";
 
 interface MoodInput {
-  moodList: Mood[];
+  id: number;
   dispatchMoods: React.Dispatch<MoodAction>;
 }
-function MoodDetail({ moodList, dispatchMoods }: MoodInput) {
+//Converts idParam so it can be passed as a prop to the MoodDetail hook
+export const MoodDetailWrapper = ({ dispatchMoods }: MoodInput) => {
+  const { idParam } = useParams();
+  var moodId: number = -1;
+  if (idParam !== undefined && !isNaN(Number(idParam))) {
+    moodId = parseInt(idParam);
+  }
+  return <MoodDetail id={moodId} dispatchMoods={dispatchMoods} />;
+};
+export function MoodDetail({ id, dispatchMoods }: MoodInput) {
   const [mood, setMood] = useState(new Mood(-1, 0, new Date(), "", []));
   const [moodValue, setMoodValue] = useState(0);
-  const { trigger: triggerAddMood, data: returnData } = useSWRMutation(
-    "../data/apiMock.ts",
-    (url) => addMood(url, mood)
-  );
+
+  const { trigger: triggerRetrieveMood, data: returnExistingMood } =
+    useSWRMutation("../data/apiMock.ts", (url) => retrieveMood(url, id));
+    const { trigger: triggerAddMood, data: returnData } = useSWRMutation(
+      "../data/apiMock.ts",
+      (url) => addMood(url, mood)
+    );
+
+  if (id > -1) {
+    //id -1 represents a new mood, any other id should be retrieved to be edited
+    triggerRetrieveMood();
+  }
   useEffect(() => {
     if (!returnData) return;
     setMood({
@@ -33,7 +51,14 @@ function MoodDetail({ moodList, dispatchMoods }: MoodInput) {
       newList: [],
     });
   }, [returnData]);
-
+  useEffect(() => {
+    console.log(`useEffect ${returnExistingMood}`);
+    if (!returnExistingMood) return;
+    setMood({
+      ...returnExistingMood,
+    });
+    setMoodValue(returnExistingMood.value);
+  }, [returnExistingMood]);
   useEffect(() => {
     setMood({
       ...mood,
@@ -44,24 +69,25 @@ function MoodDetail({ moodList, dispatchMoods }: MoodInput) {
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     triggerAddMood();
-    console.log(moodList);
   };
   return (
     <article className="mood-detail">
       <form onSubmit={handleSubmit}>
-          <ValueContainer moodValue={moodValue} setMoodValue={setMoodValue} />
-          <TagSelector tagList={mood.tags}></TagSelector>
-          <textarea
-            id="comment-input"
-            onChange={(e) => {
-              setMood({
-                ...mood,
-                comment: e.currentTarget.value,
-              });
-            }}/>
-          <div className="filled-button-container">
-            <input className="filled-button" type="submit" value="Save" />
-          </div>
+        <ValueContainer moodValue={moodValue} setMoodValue={setMoodValue} />
+        <TagSelector tagList={mood.tags}></TagSelector>
+        <textarea
+          id="comment-input"
+          onChange={(e) => {
+            setMood({
+              ...mood,
+              comment: e.currentTarget.value,
+            });
+          }}
+          value={mood.comment}
+        />
+        <div className="filled-button-container">
+          <input className="filled-button" type="submit" value="Save" />
+        </div>
       </form>
     </article>
   );

@@ -1,6 +1,12 @@
 import { Mood } from "./classes/mood";
 import { Tag } from "./classes/tag";
 
+export async function retrieveMood(url: string, id: number) {
+  console.log("retrieveMood mock");
+  await delay(100);
+  const results= storedMoodList.find((x)=>{if(x.id===id) return x;});
+  return results;
+}
 export async function addMood(url: string, mood: Mood) {
   console.log("addMood mock");
   await delay(500);

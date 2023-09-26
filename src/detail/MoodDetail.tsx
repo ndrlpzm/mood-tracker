@@ -57,6 +57,15 @@ export function MoodDetail({ id, dispatchMoods }: MoodInput) {
     id=returnData.id;
   }, [returnData]);
   useEffect(() => {
+    if (!returnUpdateData) return;
+    dispatchMoods({
+      type: "replace",
+      mood: mood,
+      moodIndex: -1,
+      newList: returnUpdateData,
+    });
+  }, [returnUpdateData]);
+  useEffect(() => {
     console.log(`useEffect ${returnExistingMood}`);
     if (!returnExistingMood) return;
     setMood({

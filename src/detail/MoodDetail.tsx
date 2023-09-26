@@ -5,7 +5,7 @@ import ValueContainer from "./ValueContainer";
 import useSWRMutation from "swr/mutation";
 
 import { Mood } from "../data/classes/mood";
-import { addMood, retrieveMood } from "../data/apiMock";
+import { addMood, retrieveMood, updateMood } from "../data/apiMock";
 import { MoodAction } from "../data/moodReducer";
 import TagSelector from "./TagSelector";
 import { useParams } from "react-router-dom";
@@ -33,6 +33,10 @@ export function MoodDetail({ id, dispatchMoods }: MoodInput) {
       "../data/apiMock.ts",
       (url) => addMood(url, mood)
     );
+    const { trigger: triggerUpdateMood, data: returnUpdateData } = useSWRMutation(
+      "../data/apiMock.ts",
+      (url) => updateMood(url, mood)
+    );
 
   if (id > -1) {
     //id -1 represents a new mood, any other id should be retrieved to be edited
@@ -50,6 +54,7 @@ export function MoodDetail({ id, dispatchMoods }: MoodInput) {
       moodIndex: -1,
       newList: [],
     });
+    id=returnData.id;
   }, [returnData]);
   useEffect(() => {
     console.log(`useEffect ${returnExistingMood}`);
@@ -68,8 +73,8 @@ export function MoodDetail({ id, dispatchMoods }: MoodInput) {
 
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    triggerAddMood();
-  };
+    id > -1 ? triggerUpdateMood() : triggerAddMood();
+  }
   return (
     <article className="mood-detail">
       <form onSubmit={handleSubmit}>

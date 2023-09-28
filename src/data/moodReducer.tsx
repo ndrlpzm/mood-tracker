@@ -17,7 +17,7 @@ export default function moodsReducer(moods: Mood[], action: MoodAction) {
       return [...moods, action.mood];
     }
     case "update": {
-      console.log("delete");
+      console.log("update");
       return moods.map((x) => {
         if (x.id === action.mood.id) return action.mood;
         else return x;

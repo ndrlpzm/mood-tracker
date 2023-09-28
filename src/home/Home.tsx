@@ -16,14 +16,14 @@ function Home() {
   const dispatch=useContext(MoodsDispatchContext);
   const { data, isLoading } = useSWR("/api/v1/moods", returnLatestMoods);
   useEffect(() => {
-    if(!isLoading){
+    if(!data) return;
+      console.log(data===moodList);
       dispatch({
         type: "replace",
         mood: new Mood(-1,0,new Date(),"",[]),
         moodIndex: -1,
         newList: data ?? [],
       });
-    }
   }, [data]);
   const formattedData = () => {
     var colorMappings = retrieveIconColors();

@@ -57,32 +57,35 @@ export function MoodDetail({ id }: MoodInput) {
       ...mood,
       id: returnData.id,
     });
-    dispatch({
-      type: "add",
-      mood: returnData,
-      moodIndex: -1,
-      newList: [],
-    });
+    //TODO: Error handling
+    // dispatch({
+    //   type: "add",
+    //   mood: returnData,
+    //   moodIndex: -1,
+    //   newList: [],
+    // });
     id = returnData.id;
   }, [returnData]);
   useEffect(() => {
-    if (!returnUpdateData) return;
-    dispatch({
-      type: "update",
-      mood: mood,
-      moodIndex: -1,
-      newList: [],
-    });
+    //TODO: Error handling
+    //if (!returnUpdateData) return;
+    // dispatch({
+    //   type: "update",
+    //   mood: mood,
+    //   moodIndex: -1,
+    //   newList: [],
+    // });
   }, [returnUpdateData]);
   useEffect(() => {
     console.log(returnDeleteData);
     if (!returnDeleteData) return;
-    dispatch({
-      type: "delete",
-      mood: mood,
-      moodIndex: mood.id,
-      newList: [],
-    });
+    //TODO: Error handling
+    // dispatch({
+    //   type: "delete",
+    //   mood: mood,
+    //   moodIndex: mood.id,
+    //   newList: [],
+    // });
     navigate(`/`);
   }, [returnDeleteData]);
   useEffect(() => {

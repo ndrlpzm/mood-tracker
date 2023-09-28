@@ -1,13 +1,12 @@
 import ClipLoader from "react-spinners/ClipLoader";
 import { Mood } from "../data/classes/mood";
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import HomeArticle from "./HomeArticle";
 import useSWR from "swr";
 import { returnLatestMoods } from "../data/apiMock";
-import { MoodAction, MoodsContext, MoodsDispatchContext } from "../data/moodReducer";
-import useSWRMutation from "swr/mutation";
+import { MoodsContext, MoodsDispatchContext } from "../data/moodReducer";
 
 interface HomeInput {
 }

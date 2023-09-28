@@ -22,9 +22,13 @@ export async function updateMoodMock(url: string, mood: Mood) {
   });
   return storedMoodList;
 }
-export function deleteMoodMock(url: string, mood: Mood) {
-  const index = storedMoodList.indexOf(mood);
-  storedMoodList = storedMoodList.splice(index, 1);
+export async function deleteMoodMock(url: string, id: number) {
+  // const index = storedMoodList.indexOf(mood);
+  // return storedMoodList = storedMoodList.splice(index, 1);
+  
+  storedMoodList = storedMoodList.filter((value) => id !== value.id);
+  console.log(storedMoodList);
+  return storedMoodList;
 }
 export async function returnLatestMoodsMock() {
   const orderDatesDesc = (prevMood: Mood, curMood: Mood) => {

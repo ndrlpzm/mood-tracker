@@ -14,16 +14,16 @@ export async function retrieveMood(url: string, id: number) {
   return retrieveMoodMock(url, id);
 }
 export async function addMood(url: string, mood: Mood) {
-  await delay(500);
+  await delay(100);
   return addMoodMock(url, mood);
 }
 export async function updateMood(url: string, mood: Mood) {
   await delay(100);
   return updateMoodMock(url, mood);
 }
-export function deleteMood(url: string, mood: Mood) {
-  console.log("deleteMood mock");
-  return deleteMoodMock(url, mood);
+export async function deleteMood(url: string, id: number) {
+  await delay(100);
+  return deleteMoodMock(url, id);
 }
 
 export async function returnLatestMoods() {

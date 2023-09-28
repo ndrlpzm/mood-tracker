@@ -16,7 +16,6 @@ function HomeArticle({ mood, colorMappings }: HomeArticleInput) {
 		} else {
 		  commentIcon = <></>;
 		}
-		
 		const loadMood = (e: React.MouseEvent<HTMLFormElement>) => {
 			e.preventDefault();
 			console.log(`homearticle ${mood.id}`)

@@ -1,25 +1,14 @@
-import React, { useEffect, useReducer } from "react";
-import useSWR from "swr";
-import { returnLatestMoods } from "./data/apiMock";
+import React, {useReducer } from "react";
 import "./App.css";
 import {MoodDetailWrapper} from "./detail/MoodDetail";
 import Home from "./home/Home";
 import { Mood } from "./data/classes/mood";
-import moodsReducer from "./data/moodReducer";
-import { Routes, Route, Link } from "react-router-dom";
+import { MoodsProvider } from "./data/moodReducer";
+import { Routes, Route} from "react-router-dom";
 
 function App() {
-  const [moodList, dispatch] = useReducer(moodsReducer, new Array<Mood>());
-  const { data, isLoading } = useSWR("/api/v1/moods", returnLatestMoods);
-  useEffect(() => {
-    dispatch({
-      type: "replace",
-      mood: new Mood(-1,0,new Date(),"",[]),
-      moodIndex: -1,
-      newList: data ?? [],
-    });
-  }, [data]);
   return (
+    <MoodsProvider>
     <div className="App">
       {/* <nav>
         <Link to="/" className="nav-item">
@@ -34,19 +23,17 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<Home moodList={moodList} isLoading={isLoading}></Home>}
+          element={<Home></Home>}
         ></Route>
         <Route
           path="/mood/:idParam"
           element={
-            <MoodDetailWrapper
-            id={-1}
-              dispatchMoods={dispatch}
-            ></MoodDetailWrapper>
+            <MoodDetailWrapper></MoodDetailWrapper>
           }
         ></Route>
       </Routes></main>
     </div>
+    </MoodsProvider>
   );
 }
 

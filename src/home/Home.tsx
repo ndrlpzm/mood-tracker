@@ -1,16 +1,31 @@
 import ClipLoader from "react-spinners/ClipLoader";
 import { Mood } from "../data/classes/mood";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import HomeArticle from "./HomeArticle";
+import useSWR from "swr";
+import { returnLatestMoods } from "../data/apiMock";
+import { MoodAction, MoodsContext, MoodsDispatchContext } from "../data/moodReducer";
+import useSWRMutation from "swr/mutation";
 
 interface HomeInput {
-  moodList: Mood[];
-  isLoading: boolean;
 }
-function Home({ moodList, isLoading }: HomeInput) {
+function Home() {
   const navigate = useNavigate();
+  const moodList=useContext(MoodsContext);
+  const dispatch=useContext(MoodsDispatchContext);
+  const { data, isLoading } = useSWR("/api/v1/moods", returnLatestMoods);
+  useEffect(() => {
+    if(!isLoading){
+      dispatch({
+        type: "replace",
+        mood: new Mood(-1,0,new Date(),"",[]),
+        moodIndex: -1,
+        newList: data ?? [],
+      });
+    }
+  }, [data]);
   const formattedData = () => {
     var colorMappings = retrieveIconColors();
     var prevDate: string;

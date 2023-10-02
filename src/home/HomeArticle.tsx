@@ -22,7 +22,7 @@ function HomeArticle({ mood, colorMappings }: HomeArticleInput) {
 		  };
 	return (
 		  <article className="home-article" key={mood.id} onClick={loadMood}>
-			  <span>{mood.date.toLocaleTimeString()}</span>
+			  <span>{mood.date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
 			  <div className="mood-value" style={{ backgroundColor: colorMappings.get(mood.value) }}>
 			  </div>
 			<TagDisplay tagList={mood.tags} />

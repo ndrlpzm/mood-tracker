@@ -1,16 +1,17 @@
 import React from "react";
 import MoodValueButton from "../common-components/MoodValueButton";
+import { Mood } from "../data/classes/mood";
 interface ValueContainerInput {
-  moodValue: number;
-  setMoodValue:  React.Dispatch<React.SetStateAction<number>>;
+  mood: Mood;
+  setMood:  React.Dispatch<React.SetStateAction<Mood>>;
 }
-function ValueContainer({ moodValue, setMoodValue }: ValueContainerInput) {
+function ValueContainer({ mood, setMood }: ValueContainerInput) {
   const ratings: number[] = [1,2,3,4,5];
   return (
     <div id="value-container">
       {ratings.map(function (i) {
         return (
-          <MoodValueButton moodValue={i} setMoodValue={setMoodValue} isSelected={moodValue===i}></MoodValueButton>
+          <MoodValueButton moodValue={i} mood={mood} setMood={setMood} isSelected={mood.value===i}></MoodValueButton>
         );
       })}
     </div>

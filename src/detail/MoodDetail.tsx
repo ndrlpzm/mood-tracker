@@ -7,12 +7,10 @@ import useSWRMutation from "swr/mutation";
 
 import { Mood } from "../data/classes/mood";
 import { addMood, retrieveMood, updateMood, deleteMood } from "../data/apiMock";
-import { MoodsDispatchContext } from "../data/moodReducer";
 import TagSelector from "./TagSelector";
 import IconButton from "../common-components/IconButton";
 import leftArrowIcon from "../resources/icons8-chevron-left-50.png";
 import xIcon from "../resources/icons8-x-50.png";
-import { Tag } from "../data/classes/tag";
 
 interface MoodInput {
   id: number;
@@ -29,8 +27,6 @@ export const MoodDetailWrapper = () => {
 export function MoodDetail({ id }: MoodInput) {
   const navigate = useNavigate();
   const [mood, setMood] = useState(new Mood(-1, 0, new Date(), "", []));
-  const [moodValue, setMoodValue] = useState(0);
-  const [currentTags, setCurrentTags] = useState(new Array<Tag>());
 
   const { trigger: triggerRetrieveMood, data: returnExistingMood } =
     useSWRMutation("../data/apiMock.ts", (url) => retrieveMood(url, id));
@@ -76,16 +72,7 @@ export function MoodDetail({ id }: MoodInput) {
     setMood({
       ...returnExistingMood,
     });
-    setMoodValue(returnExistingMood.value);
-    setCurrentTags(returnExistingMood.tags);
   }, [returnExistingMood]);
-  useEffect(() => {
-    setMood({
-      ...mood,
-      value: moodValue,
-      tags:currentTags
-    });
-  }, [moodValue, currentTags]);
 
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -111,8 +98,8 @@ export function MoodDetail({ id }: MoodInput) {
       ></IconButton>
       <article className="mood-detail">
         <form onSubmit={handleSubmit}>
-          <ValueContainer moodValue={moodValue} setMoodValue={setMoodValue} />
-          <TagSelector tagList={currentTags} setTagList={setCurrentTags}></TagSelector>
+          <ValueContainer mood={mood} setMood={setMood} />
+          <TagSelector mood={mood} setMood={setMood}></TagSelector>
           <textarea
             id="comment-input"
             onChange={(e) => {

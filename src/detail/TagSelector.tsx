@@ -4,17 +4,18 @@ import TagDisplay from "./TagDisplay";
 import { JsxElement } from "typescript";
 import { returnAvailableTags } from "../data/apiMock";
 import useSWRMutation from "swr/mutation";
+import { Mood } from "../data/classes/mood";
 
 interface TagSelectorInput {
-	tagList: Tag[];
-	setTagList:React.Dispatch<React.SetStateAction<Tag[]>>;
+	mood: Mood;
+	setMood:React.Dispatch<React.SetStateAction<Mood>>;
   }
-function TagSelector({tagList, setTagList}:TagSelectorInput){
+function TagSelector({mood, setMood}:TagSelectorInput){
 	const [showingAddTag, setShowingAddTag] = useState(false);  
 	const [remainingTagList, setRemainingTagList] = useState(new Array<Tag>()); 
 	const { trigger: triggerLoadTags, data: returnData } = useSWRMutation(
 		"../data/apiMock.ts",
-		() => returnAvailableTags(tagList.map((x)=>{return x.id}))
+		() => returnAvailableTags(mood.tags.map((x)=>{return x.id}))
 	  );
 	  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 		  e.preventDefault();
@@ -25,7 +26,7 @@ function TagSelector({tagList, setTagList}:TagSelectorInput){
 		const handleLiClick = (e: React.MouseEvent<HTMLLIElement>) => {
 			e.preventDefault();
 			const currElement:HTMLLIElement=e.currentTarget;
-			if(currElement.dataset.key!==undefined) setTagList([...tagList, remainingTagList[parseInt(currElement.dataset.key)]]);
+			if(currElement.dataset.key!==undefined) setMood({...mood, tags:[...mood.tags, remainingTagList[parseInt(currElement.dataset.key)]]});
 			setShowingAddTag(!showingAddTag);
 		};
 	useEffect(() => {
@@ -33,7 +34,7 @@ function TagSelector({tagList, setTagList}:TagSelectorInput){
 	  }, [returnData]);
 return(
 <div>
-	<TagDisplay tagList={tagList} setTagList={setTagList} allowDelete={true}></TagDisplay>
+	<TagDisplay mood={mood} setMood={setMood} allowDelete={true}></TagDisplay>
 	<button onClick={handleClick}>+</button>
 	{showingAddTag && <ul>{remainingTagList.map((x,i)=>{return <li data-key={i} key={x.id} onClick={handleLiClick} >{x.value}</li>})}</ul>}
 	</div>);

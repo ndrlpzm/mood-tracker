@@ -1,14 +1,16 @@
-import smileyImage from "../resources/smiling-emoticon-square-face.png";
+import { Mood } from "../data/classes/mood";
 import "./CommonComponents.css";
 
 interface MoodValueButtonInput {
   moodValue: number;
-  setMoodValue: React.Dispatch<React.SetStateAction<number>>;
+  mood: Mood;
+  setMood: React.Dispatch<React.SetStateAction<Mood>>;
   isSelected: boolean;
 }
 function MoodValueButton({
   moodValue,
-  setMoodValue,
+  mood,
+  setMood,
   isSelected,
 }: MoodValueButtonInput) {
   var colorMappings = retrieveIconColors();
@@ -16,7 +18,7 @@ function MoodValueButton({
   isSelected? style="mood-value selected": style="mood-value unselected";
   const handleClickRating = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setMoodValue(moodValue);
+    setMood({...mood, value:moodValue});
   };
   return (
     <button onClick={handleClickRating} key={moodValue} value={moodValue} className={style} style={{ backgroundColor: colorMappings.get(moodValue) }}>

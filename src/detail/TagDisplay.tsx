@@ -1,23 +1,23 @@
-import { Tag } from "../data/classes/tag";
+import { Mood } from "../data/classes/mood";
 
 interface TagDisplayInput {
 	allowDelete: boolean;
-	tagList: Tag[];
-	setTagList:React.Dispatch<React.SetStateAction<Tag[]>>;
+	mood: Mood;
+	setMood:React.Dispatch<React.SetStateAction<Mood>>;
   }
-function TagDisplay({tagList, setTagList, allowDelete}:TagDisplayInput){
+function TagDisplay({mood, setMood, allowDelete}:TagDisplayInput){
 	const handleTagClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		if(!allowDelete) return;
 		e.preventDefault();
 		const currElement:HTMLDivElement=e.currentTarget;
 		if(currElement.dataset.key!==undefined){
-			const newArray = tagList.slice(); 
+			const newArray = mood.tags.slice(); 
 			newArray.splice(parseInt(currElement.dataset.key),1);
-			setTagList(newArray);
+			setMood({...mood, tags:newArray});
 		}
 	};
 	return(<div className="tag-container">
-		{tagList.map((tag,i) => <div className="tag" data-key={i} key={tag.id} onClick={handleTagClick}><div style={{backgroundColor:tag.color}}></div>{tag.value}</div>)}
+		{mood.tags.map((tag,i) => <div className="tag" data-key={i} key={tag.id} onClick={handleTagClick}><div style={{backgroundColor:tag.color}}></div>{tag.value}</div>)}
 		</div>);
 	}
 export default TagDisplay;

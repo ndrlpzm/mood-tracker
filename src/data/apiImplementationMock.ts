@@ -38,9 +38,9 @@ export async function returnLatestMoodsMock() {
   orderedMoodList.sort(orderDatesDesc);
   return orderedMoodList;
 }
-export function returnAvailableTagsMock(selectedTags: Tag[]) {
+export function returnAvailableTagsMock(selectedTagIds: number[]) {
   console.log("returnAvailableTags mock");
-  return storedTagList.filter((x) => !selectedTags.includes(x));
+  return storedTagList.filter((x) => !selectedTagIds.includes(x.id));
 }
 /*------------------------------------------------------------------- */
 const now = new Date();

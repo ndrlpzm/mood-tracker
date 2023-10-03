@@ -31,8 +31,8 @@ export async function returnLatestMoods() {
   await delay(1500);
   return returnLatestMoodsMock();
 }
-export function returnAvailableTags(selectedTags: Tag[]) {
-  return returnAvailableTagsMock(selectedTags);
+export function returnAvailableTags(selectedTagIds: number[]) {
+  return returnAvailableTagsMock(selectedTagIds);
 }
 
 function delay(ms: number) {

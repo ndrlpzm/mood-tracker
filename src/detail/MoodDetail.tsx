@@ -12,6 +12,7 @@ import TagSelector from "./TagSelector";
 import IconButton from "../common-components/IconButton";
 import leftArrowIcon from "../resources/icons8-chevron-left-50.png";
 import xIcon from "../resources/icons8-x-50.png";
+import { Tag } from "../data/classes/tag";
 
 interface MoodInput {
   id: number;
@@ -29,6 +30,7 @@ export function MoodDetail({ id }: MoodInput) {
   const navigate = useNavigate();
   const [mood, setMood] = useState(new Mood(-1, 0, new Date(), "", []));
   const [moodValue, setMoodValue] = useState(0);
+  const [currentTags, setCurrentTags] = useState(new Array<Tag>());
 
   const { trigger: triggerRetrieveMood, data: returnExistingMood } =
     useSWRMutation("../data/apiMock.ts", (url) => retrieveMood(url, id));
@@ -70,19 +72,20 @@ export function MoodDetail({ id }: MoodInput) {
     navigate(`/`);
   }, [returnDeleteData]);
   useEffect(() => {
-    console.log(`useEffect ${returnExistingMood}`);
     if (!returnExistingMood) return;
     setMood({
       ...returnExistingMood,
     });
     setMoodValue(returnExistingMood.value);
+    setCurrentTags(returnExistingMood.tags);
   }, [returnExistingMood]);
   useEffect(() => {
     setMood({
       ...mood,
       value: moodValue,
+      tags:currentTags
     });
-  }, [moodValue]);
+  }, [moodValue, currentTags]);
 
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -109,7 +112,7 @@ export function MoodDetail({ id }: MoodInput) {
       <article className="mood-detail">
         <form onSubmit={handleSubmit}>
           <ValueContainer moodValue={moodValue} setMoodValue={setMoodValue} />
-          <TagSelector tagList={mood.tags}></TagSelector>
+          <TagSelector tagList={currentTags} setTagList={setCurrentTags}></TagSelector>
           <textarea
             id="comment-input"
             onChange={(e) => {

@@ -11,7 +11,7 @@ function ValueContainer({ mood, setMood }: ValueContainerInput) {
     <div id="value-container">
       {ratings.map(function (i) {
         return (
-          <MoodValueButton key={i} moodValue={i} mood={mood} setMood={setMood} isSelected={mood.value===i}></MoodValueButton>
+          <MoodValueButton key={i} moodValue={i} mood={mood} setMood={setMood} isSelected={mood.value===i} displayOnly={false}></MoodValueButton>
         );
       })}
     </div>

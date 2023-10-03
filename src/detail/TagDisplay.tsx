@@ -12,7 +12,7 @@ function TagDisplay({tagList, setTagList, allowDelete}:TagDisplayInput){
 		const currElement:HTMLDivElement=e.currentTarget;
 		if(currElement.dataset.key!==undefined){
 			const newArray = tagList.slice(); 
-			newArray.splice(parseInt(currElement.dataset.key));
+			newArray.splice(parseInt(currElement.dataset.key),1);
 			setTagList(newArray);
 		}
 	};

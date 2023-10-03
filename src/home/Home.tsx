@@ -8,8 +8,6 @@ import useSWR from "swr";
 import { returnLatestMoods } from "../data/apiMock";
 import { MoodsContext, MoodsDispatchContext } from "../data/moodReducer";
 
-interface HomeInput {
-}
 function Home() {
   const navigate = useNavigate();
   const moodList=useContext(MoodsContext);
@@ -30,12 +28,12 @@ function Home() {
     var prevDate: string;
     const formattedElements = moodList.map((mood) => {
       const art: JSX.Element = (
-        <HomeArticle mood={mood} colorMappings={colorMappings}></HomeArticle>
+        <HomeArticle key={mood.id} mood={mood} colorMappings={colorMappings}></HomeArticle>
       );
       if (prevDate !== mood.date.toLocaleDateString()) {
         prevDate = mood.date.toLocaleDateString();
         const header: JSX.Element = (
-          <div className="date-container">
+          <div key={mood.date.toISOString()} className="date-container">
             <h3>{mood.date.toLocaleDateString()}</h3>
           </div>
         );

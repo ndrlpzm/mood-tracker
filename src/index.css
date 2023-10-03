@@ -65,6 +65,9 @@ code {
 .filled-button:active {
   background-color: var(--accent-shadow);
 }
+.filled-button:disabled {
+  background-color: pink;
+}
 article {
   margin: auto;
   padding: 6px 3px;

@@ -27,46 +27,14 @@ export const MoodDetailWrapper = () => {
 export function MoodDetail({ id }: MoodInput) {
   const navigate = useNavigate();
   const [mood, setMood] = useState(new Mood(-1, 0, new Date(), "", []));
+  const [allowSaving, setAllowSaving] = useState(true);
 
   const { trigger: triggerRetrieveMood, data: returnExistingMood } =
     useSWRMutation("../data/apiMock.ts", (url) => retrieveMood(url, id));
-  const { trigger: triggerAddMood, data: returnData } = useSWRMutation(
-    "../data/apiMock.ts",
-    (url) => addMood(url, mood)
-  );
-  const { trigger: triggerUpdateMood, data: returnUpdateData } = useSWRMutation(
-    "../data/apiMock.ts",
-    (url) => updateMood(url, mood)
-  );
-
-  const { trigger: triggerDeleteMood, data: returnDeleteData } = useSWRMutation(
-    "../data/apiMock.ts",
-    (url) => deleteMood(url, mood.id)
-  );
-
   if (id > -1) {
     //id -1 represents a new mood, any other id should be retrieved to be edited
     triggerRetrieveMood();
   }
-  useEffect(() => {
-    if (!returnData) return;
-    setMood({
-      ...mood,
-      id: returnData.id,
-    });
-    //TODO: Error handling
-    id = returnData.id;
-  }, [returnData]);
-  useEffect(() => {
-    //TODO: Error handling
-    if (!returnUpdateData) return;
-  }, [returnUpdateData]);
-  useEffect(() => {
-    console.log(returnDeleteData);
-    if (!returnDeleteData) return;
-    //TODO: Error handling
-    navigate(`/`);
-  }, [returnDeleteData]);
   useEffect(() => {
     if (!returnExistingMood) return;
     setMood({
@@ -74,11 +42,41 @@ export function MoodDetail({ id }: MoodInput) {
     });
   }, [returnExistingMood]);
 
+  const { trigger: triggerAddMood, data: returnAddData } = useSWRMutation(
+    "../data/apiMock.ts",
+    (url) => addMood(url, mood)
+  );
+  useEffect(() => {
+    if (!returnAddData) return;
+    goBack();
+  }, [returnAddData]);
+  const { trigger: triggerUpdateMood, data: returnUpdateData } = useSWRMutation(
+    "../data/apiMock.ts",
+    (url) => updateMood(url, mood)
+  );
+  useEffect(() => {
+    if (!returnUpdateData) return;
+    //TODO: Error handling
+    goBack();
+  }, [returnUpdateData]);
+  const { trigger: triggerDeleteMood, data: returnDeleteData } = useSWRMutation(
+    "../data/apiMock.ts",
+    (url) => deleteMood(url, mood.id)
+  );
+  useEffect(() => {
+    if (!returnDeleteData) return;
+    //TODO: Error handling
+    goBack();
+  }, [returnDeleteData]);
+
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setAllowSaving(false);
+    console.log(id);
     id > -1 ? triggerUpdateMood() : triggerAddMood();
   };
   const goBack = () => {
+    setAllowSaving(true);
     navigate(`/`);
   };
   const handleDelete = () => {
@@ -111,7 +109,12 @@ export function MoodDetail({ id }: MoodInput) {
             value={mood.comment}
           />
           <div className="filled-button-container">
-            <input className="filled-button" type="submit" value="Save" />
+            <input
+              className="filled-button"
+              type="submit"
+              value="Save"
+              disabled={!mood.value || !allowSaving}
+            />
           </div>
         </form>
       </article>

@@ -28,9 +28,7 @@ export async function deleteMood(url: string, id: number) {
 
 export async function returnLatestMoods() {
   //returns moods ordered by date-time
-  console.log("returnLatestMoods");
   await delay(1500);
-  console.log("returnLatestMoods after delay");
   return returnLatestMoodsMock();
 }
 export function returnAvailableTags(selectedTags: Tag[]) {

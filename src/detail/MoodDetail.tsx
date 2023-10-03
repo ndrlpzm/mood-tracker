@@ -29,7 +29,6 @@ export function MoodDetail({ id }: MoodInput) {
   const navigate = useNavigate();
   const [mood, setMood] = useState(new Mood(-1, 0, new Date(), "", []));
   const [moodValue, setMoodValue] = useState(0);
-  const dispatch = useContext(MoodsDispatchContext);
 
   const { trigger: triggerRetrieveMood, data: returnExistingMood } =
     useSWRMutation("../data/apiMock.ts", (url) => retrieveMood(url, id));
@@ -58,34 +57,16 @@ export function MoodDetail({ id }: MoodInput) {
       id: returnData.id,
     });
     //TODO: Error handling
-    // dispatch({
-    //   type: "add",
-    //   mood: returnData,
-    //   moodIndex: -1,
-    //   newList: [],
-    // });
     id = returnData.id;
   }, [returnData]);
   useEffect(() => {
     //TODO: Error handling
-    //if (!returnUpdateData) return;
-    // dispatch({
-    //   type: "update",
-    //   mood: mood,
-    //   moodIndex: -1,
-    //   newList: [],
-    // });
+    if (!returnUpdateData) return;
   }, [returnUpdateData]);
   useEffect(() => {
     console.log(returnDeleteData);
     if (!returnDeleteData) return;
     //TODO: Error handling
-    // dispatch({
-    //   type: "delete",
-    //   mood: mood,
-    //   moodIndex: mood.id,
-    //   newList: [],
-    // });
     navigate(`/`);
   }, [returnDeleteData]);
   useEffect(() => {

@@ -1,7 +1,6 @@
-import { ReactElement, ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Tag } from "../data/classes/tag";
 import TagDisplay from "./TagDisplay";
-import { JsxElement } from "typescript";
 import { returnAvailableTags } from "../data/apiMock";
 import useSWRMutation from "swr/mutation";
 import { Mood } from "../data/classes/mood";

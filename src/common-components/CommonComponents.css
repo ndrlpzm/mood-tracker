@@ -1,3 +1,52 @@
+
+/*BUTTONS*/
+.fab-large {
+	color: var(--accent-2-base);
+	background-color: var(--background-highlight);
+	font-size: 3em;
+	padding: 0.7em 1em;
+	border-radius: 0.5em;
+	box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.25);
+	border: none;
+  }
+  .fab-large:hover {
+	background-color: var(--accent-2-base);
+	color: var(--background-highlight);
+	box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.25);
+  }
+  .filled-button {
+	background-color: var(--accent-base);
+	color: var(--foreground-contrast);
+	font-size: 1.5em;
+	padding: 6px auto;
+	border-radius: 0.5em;
+	border: none;
+  }
+  .filled-button:hover {
+	background-color: var(--accent-highlight);
+  }
+  .filled-button:active {
+	background-color: var(--accent-shadow);
+  }
+  .filled-button:disabled {
+	background-color: pink;
+  }
+  @media screen and (width < 599px) {
+	.filled-button-container{
+	  background-color: var(--background-base);
+	  width:100dvw;
+	  position: fixed;
+	  right: 0px;
+	  bottom: 0px;
+	  text-align: center;
+	}
+	.filled-button
+	{
+		margin: 16px 0;
+	  width: 70dvw;
+	}
+  }
+/*MOOD VALUE BUTTONS*/
 .mood-value.selected{
 	border: 3px solid #0000006e;
 }
@@ -12,3 +61,28 @@
 	background-repeat: no-repeat;
 	background-position: center;
 }
+/*TAGS*/
+.tag {
+	display: flex;
+	align-items: center;
+	column-gap: 4px;
+	padding: 2px 10px;
+	border-radius: 0.5em;
+	box-shadow: 2px 3px 3px 2px rgba(0, 0, 0, 0.25);
+	background-color: white;
+  }
+  .tag > div {
+	width: 0.5em;
+	height: 0.5em;
+	border-radius: 0.5em;
+	margin-right: 4px;
+  }
+  .tag-container{
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex-wrap: wrap;
+	flex-grow:1;
+	column-gap: 8px;
+	row-gap: 8px;
+  }

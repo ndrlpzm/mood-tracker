@@ -16,7 +16,8 @@ function TagDisplay({mood, setMood, allowDelete}:TagDisplayInput){
 			setMood({...mood, tags:newArray});
 		}
 	};
-	return(<div className="tag-container">
+	return(
+	<div className="tag-container">
 		{mood.tags.map((tag,i) => <div className="tag" data-key={i} key={tag.id} onClick={handleTagClick}><div style={{backgroundColor:tag.color}}></div>{tag.value}</div>)}
 		</div>);
 	}

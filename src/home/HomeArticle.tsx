@@ -1,6 +1,6 @@
 import { SetStateAction } from "react";
 import { Mood } from "../data/classes/mood";
-import TagDisplay from "../detail/TagDisplay";
+import TagDisplay from "../common-components/TagDisplay";
 import messageImage from "../resources/message.png";
 import { useNavigate } from "react-router-dom";
 import MoodValueButton from "../common-components/MoodValueButton";

@@ -13,7 +13,7 @@ function HomeArticle({ mood, colorMappings }: HomeArticleInput) {
 	const navigate = useNavigate();
 		var commentIcon: JSX.Element;
 		if (mood.comment.length > 0) {
-		  commentIcon = <img src={messageImage}></img>;
+		  commentIcon = <img alt="Comments" src={messageImage}></img>;
 		} else {
 		  commentIcon = <></>;
 		}
@@ -31,6 +31,6 @@ function HomeArticle({ mood, colorMappings }: HomeArticleInput) {
 	);
   }
   const setMoodPlaceholder=function (value: SetStateAction<Mood>): void {
-	throw new Error("Function shouldn't be called.");
+	console.log("Unexpected mood state change");
 }
   export default HomeArticle;

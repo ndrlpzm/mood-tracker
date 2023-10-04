@@ -13,22 +13,18 @@ export class MoodAction {
 export default function moodsReducer(moods: Mood[], action: MoodAction) {
   switch (action.type) {
     case "add": {
-      console.log("add");
       return [...moods, action.mood];
     }
     case "update": {
-      console.log("update");
       return moods.map((x) => {
         if (x.id === action.mood.id) return action.mood;
         else return x;
       });
     }
     case "delete": {
-      console.log("delete");
       return moods.filter((value) => action.mood.id !== value.id);
     }
     case "replace": {
-      console.log("replace");
       return action.newList;
     }
     default: {

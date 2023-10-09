@@ -32,10 +32,11 @@ function TagSelector({mood, setMood}:TagSelectorInput){
 		if(returnData!==undefined) setRemainingTagList(returnData);
 	  }, [returnData]);
 return(
-<div>
+<>
+	<div id="tag-heading-container"><label>Tags</label>
+	<button id="tag-dropdown-button" onClick={handleClick}>+</button></div>
+	{showingAddTag && <ul id="tag-dropdown">{remainingTagList.map((x,i)=>{return <li data-key={i} key={x.id} onClick={handleLiClick} >{x.value}</li>})}</ul>}
 	<TagDisplay mood={mood} setMood={setMood} allowDelete={true}></TagDisplay>
-	<button onClick={handleClick}>+</button>
-	{showingAddTag && <ul>{remainingTagList.map((x,i)=>{return <li data-key={i} key={x.id} onClick={handleLiClick} >{x.value}</li>})}</ul>}
-	</div>);
+	</>);
 }
 export default TagSelector;

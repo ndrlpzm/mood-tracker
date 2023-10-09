@@ -1,8 +1,50 @@
-.mood-detail>form{
+.mood-detail nav{
+	background-color: var(--accent-base);
+	display:flex;
+}
+.nav-left{
+	flex: 1 1 auto;
+}
+.nav-right{
+	flex: 0 1 auto;
+}
+article{
+	padding: 4px 8px;
+}
+.mood-detail form{
 	display:flex;
 	flex-direction: column;
 	justify-content: center;
-	row-gap: 1em;
+	row-gap: 0.5em;
+}
+.mood-detail label{
+	font-weight: 700;
+}
+#tag-heading-container{
+	display: flex;
+	column-gap:1em;
+}
+#tag-dropdown-button{
+	color: var(--accent-2-shadow);
+	background-color: var(--background-highlight);
+	border: 1px solid var(--accent-2-shadow);
+}
+#tag-dropdown{
+	list-style:none;
+	margin-top:0;
+	padding:0;
+	border-top: 2px solid var(--accent-2-base);
+}
+#tag-dropdown li{
+	padding:0.5em 1em;
+	border-bottom: 1px dashed var(--accent-2-highlight);
+}
+#tag-dropdown li:hover{
+	background-color:  var(--accent-2-highlight);
+}
+.mood-detail .tag-container{
+	justify-content: flex-start;
+	margin-bottom:1em;
 }
 #comment-input {
     height: 7em;
@@ -12,4 +54,5 @@
     flex-direction: row;
     justify-content: center;
     column-gap: 8px;
+	margin: 1em auto;
 }

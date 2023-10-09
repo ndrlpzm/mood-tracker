@@ -16,7 +16,7 @@ function IconButton({
     callbackFunction();
   };
   return (
-    <button onClick={handleClick}>
+    <button className="icon-button" onClick={handleClick}>
 		<img alt={description} src={displayImg}></img>
     </button>
   );

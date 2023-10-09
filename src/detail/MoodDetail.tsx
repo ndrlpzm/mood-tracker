@@ -84,21 +84,28 @@ export function MoodDetail({ id }: MoodInput) {
     triggerDeleteMood();
   };
   return (
-    <>
+    <div className="mood-detail">
+      <nav>
+        <div className="nav-left">
       <IconButton
         displayImg={leftArrowIcon}
         callbackFunction={goBack}
         description="Back"
       ></IconButton>
+      </div>
+        <div className="nav-right">
       <IconButton
         displayImg={xIcon}
         callbackFunction={handleDelete}
         description="Delete"
       ></IconButton>
-      <article className="mood-detail">
+      </div>
+      </nav>
+      <article>
         <form onSubmit={handleSubmit}>
           <ValueContainer mood={mood} setMood={setMood} />
           <TagSelector mood={mood} setMood={setMood}></TagSelector>
+          <label htmlFor="comment-input">Comment</label>
           <textarea
             id="comment-input"
             onChange={(e) => {
@@ -119,7 +126,7 @@ export function MoodDetail({ id }: MoodInput) {
           </div>
         </form>
       </article>
-    </>
+    </div>
   );
 }
 export default MoodDetail;

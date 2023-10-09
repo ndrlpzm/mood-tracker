@@ -29,7 +29,19 @@
 	background-color: var(--accent-shadow);
   }
   .filled-button:disabled {
-	background-color: pink;
+	background-color: var(--gray-highlight);
+	color: var(--gray-base);
+  }
+  .icon-button{
+	border: 3px solid transparent;
+	background-color: transparent;
+	padding:2px 4px;
+  }
+  .icon-button img{
+	height: 3em;
+  }
+  .icon-button:hover{
+	border-color: var(--transparent-black);
   }
   @media screen and (width < 599px) {
 	.filled-button-container{
@@ -48,7 +60,7 @@
   }
 /*MOOD VALUE BUTTONS*/
 .mood-value.selected{
-	border: 3px solid #0000006e;
+	border: 3px solid var(--transparent-black);
 }
 .mood-value{
 	flex-shrink: 0;

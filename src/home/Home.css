@@ -12,10 +12,11 @@ h3 {
 .home-article {
   display: flex;
   flex-flow: row nowrap;
-  column-gap: 8px;
+  column-gap: 12px;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--accent-2-shadow);
+  padding:4px 8px;
 }
 .new-mood-button{    
 	position: fixed;
@@ -28,8 +29,15 @@ h3 {
 
 /* --- Medium ----------------------------------------------------------------*/
 @media screen and (600px < width < 839px) {
+  .home-article {
+  column-gap: 16px;
+  padding:8px 12px;
+}
 }
 
 /* --- Expanded --------------------------------------------------------------*/
-@media screen and (600px < width < 840px) {
+@media screen and (840px < width) {
+  .home-article {
+  column-gap: 24px;
+  }
 }

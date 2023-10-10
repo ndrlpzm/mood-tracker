@@ -17,9 +17,6 @@
   justify-content: center;
   color: white;
 }
-footer{
-  background-color: var(--accent-2-shadow);
-}
 
 .App-link {
   color: #61dafb;

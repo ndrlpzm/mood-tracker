@@ -20,8 +20,8 @@ h3 {
 }
 .new-mood-button{    
 	position: fixed;
-  right: 16px;
-  bottom: 16px;
+  right: var(--margin-sides);
+  bottom:  var(--margin-top-bottom);
 }
 /* --- Compact ---------------------------------------------------------------*/
 @media screen and (width < 599px) {

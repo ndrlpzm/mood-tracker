@@ -13,6 +13,7 @@ function Home() {
   const moodList=useContext(MoodsContext);
   const dispatch=useContext(MoodsDispatchContext);
   const { data, isLoading } = useSWR("/api/v1/moods", returnLatestMoods);
+
   useEffect(() => {
     if(!data) return;
       dispatch({

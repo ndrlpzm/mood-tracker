@@ -12,6 +12,7 @@ import TagSelector from "./TagSelector";
 import IconButton from "../common-components/IconButton";
 import leftArrowIcon from "../resources/icons8-chevron-left-50.png";
 import xIcon from "../resources/icons8-x-50.png";
+import { useSWRConfig } from "swr";
 
 interface MoodInput {
   id: number;
@@ -29,6 +30,7 @@ export function MoodDetail({ id }: MoodInput) {
   const navigate = useNavigate();
   const [mood, setMood] = useState(new Mood(-1, 0, new Date(), "", []));
   const [allowSaving, setAllowSaving] = useState(true);
+  const { cache } = useSWRConfig(); 
 
   const { trigger: triggerRetrieveMood, data: returnExistingMood } =
     useSWRMutation("../data/apiMock.ts", (url) => retrieveMood(url, id));
@@ -77,6 +79,7 @@ export function MoodDetail({ id }: MoodInput) {
   };
   const goBack = () => {
     setAllowSaving(true);
+    cache.delete("/api/v1/moods");
     navigate(`/`);
   };
   const handleDelete = () => {

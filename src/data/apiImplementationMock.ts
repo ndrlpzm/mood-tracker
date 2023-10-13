@@ -39,7 +39,6 @@ export async function returnLatestMoodsMock() {
   return orderedMoodList;
 }
 export function returnAvailableTagsMock(selectedTagIds: number[]) {
-  console.log("returnAvailableTags mock");
   return storedTagList.filter((x) => !selectedTagIds.includes(x.id));
 }
 /*------------------------------------------------------------------- */

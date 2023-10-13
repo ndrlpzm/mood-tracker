@@ -73,7 +73,6 @@ export function MoodDetail({ id }: MoodInput) {
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     setAllowSaving(false);
-    console.log(id);
     id > -1 ? triggerUpdateMood() : triggerAddMood();
   };
   const goBack = () => {

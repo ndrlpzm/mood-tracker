@@ -1,0 +1,190 @@
+openapi: 3.0.3
+info:
+  title: Mood backend spec
+  description: |-
+    Specification for a mood tracker app.
+    
+    It allows the user to add, edit and delete new moods and assign them tags.
+  version: 1.0.0
+tags:
+  - name: mood
+  - name: tags
+paths:
+  /moods/{id}:
+    get:
+      tags:
+        - mood
+      operationId: getMood
+      parameters:
+        - name: id
+          in: path
+          required: true
+          explode: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mood'
+        '400':
+          description: Invalid id supplied
+        '404':
+          description: Mood not found
+    put:
+      tags:
+        - mood
+      operationId: updateMood
+      parameters:
+        - name: id
+          in: path
+          required: true
+          explode: true
+          schema:
+            type: number
+      requestBody:
+        description: Create a new mood
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateMoodReq'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mood'
+        '400':
+          description: Invalid id supplied
+        '404':
+          description: Mood not found
+    delete:
+      tags:
+        - mood
+      operationId: deleteMood
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Invalid id supplied
+        '404':
+          description: Mood not found
+  /moods:
+    post:
+      tags:
+        - mood
+      operationId: createMood
+      requestBody:
+        description: Create a new mood
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateMoodReq'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mood'
+        '400':
+          description: Invalid data supplied
+    get:
+      tags:
+        - mood
+      operationId: searchMoods
+      parameters:
+        - name: itemsPerPage
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 0
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoodList'
+        '400':
+          description: Invalid params
+components:
+  schemas:
+    Mood:
+      type: object
+      properties:
+        id:
+          type: number
+          format: long
+        value:
+          $ref: '#/components/schemas/MoodValue'
+        date:
+          type: string
+          format: date
+        comment:
+          type: string
+        tags: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    CreateOrUpdateMoodReq:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/MoodValue'
+        date:
+          type: string
+          format: date
+        comment:
+          type: string
+        tags: 
+          type: array
+          items:
+            type: number
+    Tag:
+      type: object
+      properties:
+        id:
+          type: number
+          format: long
+        name:
+          type: string
+        color:
+          type: string
+    MoodValue:
+      type: number
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+    CreateOTagReq:
+      type: object
+      
+    MoodList:
+      type: object
+      properties:
+        count:
+          type: number
+          format: integer
+        moods:
+          type: array
+          items:
+            $ref: '#/components/schemas/Mood'

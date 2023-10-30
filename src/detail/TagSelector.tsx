@@ -13,7 +13,7 @@ function TagSelector({mood, setMood}:TagSelectorInput){
 	const [showingAddTag, setShowingAddTag] = useState(false);  
 	const [remainingTagList, setRemainingTagList] = useState(new Array<Tag>()); 
 	const { trigger: triggerLoadTags, data: returnData } = useSWRMutation(
-		"../data/apiMock.ts",
+		"/tags",
 		() => returnAvailableTags(mood.tags.map((x)=>{return x.id}))
 	  );
 	  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {

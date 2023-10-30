@@ -33,7 +33,7 @@ export function MoodDetail({ id }: MoodInput) {
   const { cache } = useSWRConfig(); 
 
   const { trigger: triggerRetrieveMood, data: returnExistingMood } =
-    useSWRMutation("../data/apiMock.ts", (url) => retrieveMood(url, id));
+    useSWRMutation("/moods", (url) => retrieveMood(url, id));
   if (id > -1) {
     //id -1 represents a new mood, any other id should be retrieved to be edited
     triggerRetrieveMood();
@@ -46,7 +46,7 @@ export function MoodDetail({ id }: MoodInput) {
   }, [returnExistingMood]);
 
   const { trigger: triggerAddMood, data: returnAddData } = useSWRMutation(
-    "../data/apiMock.ts",
+    "/moods",
     (url) => addMood(url, mood)
   );
   useEffect(() => {
@@ -54,7 +54,7 @@ export function MoodDetail({ id }: MoodInput) {
     goBack();
   }, [returnAddData]);
   const { trigger: triggerUpdateMood, data: returnUpdateData } = useSWRMutation(
-    "../data/apiMock.ts",
+    "/moods",
     (url) => updateMood(url, mood)
   );
   useEffect(() => {
@@ -63,7 +63,7 @@ export function MoodDetail({ id }: MoodInput) {
     goBack();
   }, [returnUpdateData]);
   const { trigger: triggerDeleteMood, data: returnDeleteData } = useSWRMutation(
-    "../data/apiMock.ts",
+    "/moods",
     (url) => deleteMood(url, mood.id)
   );
   useEffect(() => {
@@ -79,7 +79,7 @@ export function MoodDetail({ id }: MoodInput) {
   };
   const goBack = () => {
     setAllowSaving(true);
-    cache.delete("/api/v1/moods");
+    cache.delete("/moods");
     navigate(`/`);
   };
   const handleDelete = () => {

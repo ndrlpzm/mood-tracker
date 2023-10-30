@@ -12,7 +12,7 @@ function Home() {
   const navigate = useNavigate();
   const moodList=useContext(MoodsContext);
   const dispatch=useContext(MoodsDispatchContext);
-  const { data, isLoading } = useSWR("/api/v1/moods", returnLatestMoods);
+  const { data, isLoading } = useSWR("/moods", returnLatestMoods);
 
   useEffect(() => {
     if(!data) return;

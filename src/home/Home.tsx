@@ -10,26 +10,30 @@ import { MoodsContext, MoodsDispatchContext } from "../data/moodReducer";
 
 function Home() {
   const navigate = useNavigate();
-  const moodList=useContext(MoodsContext);
-  const dispatch=useContext(MoodsDispatchContext);
-  const { data, isLoading } = useSWR("/moods", returnLatestMoods);
+  const moodList = useContext(MoodsContext);
+  const dispatch = useContext(MoodsDispatchContext);
+  const { data, isLoading, isValidating } = useSWR("/moods", returnLatestMoods);
 
   useEffect(() => {
-    if(!data) return;
-      dispatch({
-        type: "replace",
-        mood: new Mood(-1,0,new Date(),"",[]),
-        moodIndex: -1,
-        newList: data ?? [],
-      });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (!data) return;
+    dispatch({
+      type: "replace",
+      mood: new Mood(-1, 0, new Date(), "", []),
+      moodIndex: -1,
+      newList: data ?? [],
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
   const formattedData = () => {
     var colorMappings = retrieveIconColors();
     var prevDate: string;
     const formattedElements = moodList.map((mood) => {
       const art: JSX.Element = (
-        <HomeArticle key={mood.id} mood={mood} colorMappings={colorMappings}></HomeArticle>
+        <HomeArticle
+          key={mood.id}
+          mood={mood}
+          colorMappings={colorMappings}
+        ></HomeArticle>
       );
       if (prevDate !== mood.date.toLocaleDateString()) {
         prevDate = mood.date.toLocaleDateString();
@@ -47,7 +51,7 @@ function Home() {
   };
   return (
     <div className="home">
-      {isLoading ? (
+      {isLoading || isValidating ? (
         <ClipLoader
           size={50}
           aria-label="Loading Spinner"

@@ -21,13 +21,17 @@ export async function updateMood(url: string, mood: Mood) {
   await delay(100);
   return updateMoodMock(url, mood);
 }
-export async function deleteMood(url: string, id: number) {
+export async function deleteMood(
+  url: string,
+  { arg }: { arg: { id: number } }
+): Promise<void> {
   await delay(100);
-  return deleteMoodMock(url, id);
+  deleteMoodMock(url, arg.id);
 }
 
 export async function returnLatestMoods() {
   //returns moods ordered by date-time
+  console.log("fetching");
   await delay(1500);
   return returnLatestMoodsMock();
 }

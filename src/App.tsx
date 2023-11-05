@@ -17,11 +17,8 @@ function App() {
         </header>
         <main>
           <Routes>
-            <Route path="/" element={<Home/>}></Route>
-            <Route
-              path="/mood/:moodId"
-              element={<MoodDetail/>}
-            ></Route>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/mood/:moodId" element={<MoodDetail />}></Route>
           </Routes>
         </main>
         <footer></footer>

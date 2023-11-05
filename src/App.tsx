@@ -1,8 +1,8 @@
 import "./App.css";
-import { MoodDetailWrapper } from "./detail/MoodDetail";
 import Home from "./home/Home";
 import { MoodsProvider } from "./data/moodReducer";
 import { Routes, Route, NavLink } from "react-router-dom";
+import MoodDetail from "./detail/MoodDetail";
 
 function App() {
   return (
@@ -17,10 +17,10 @@ function App() {
         </header>
         <main>
           <Routes>
-            <Route path="/" element={<Home></Home>}></Route>
+            <Route path="/" element={<Home/>}></Route>
             <Route
-              path="/mood/:idParam"
-              element={<MoodDetailWrapper></MoodDetailWrapper>}
+              path="/mood/:moodId"
+              element={<MoodDetail/>}
             ></Route>
           </Routes>
         </main>

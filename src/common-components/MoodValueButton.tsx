@@ -1,17 +1,15 @@
-import { Mood } from "../data/classes/mood";
+
 import "./CommonComponents.css";
 
 interface MoodValueButtonInput {
-  moodValue: number;
-  mood: Mood;
-  setMood: React.Dispatch<React.SetStateAction<Mood>>;
+  buttonValue: number;
+  setValue: React.Dispatch<React.SetStateAction<number|undefined>>;
   isSelected: boolean;
   displayOnly: boolean;
 }
 function MoodValueButton({
-  moodValue,
-  mood,
-  setMood,
+  buttonValue,
+  setValue,
   isSelected,
   displayOnly
 }: MoodValueButtonInput) {
@@ -19,14 +17,14 @@ function MoodValueButton({
   var imageMappings = retrieveIconImages();
   var classStyle:string;
   isSelected? classStyle="mood-value selected": classStyle="mood-value unselected";
-  const style={ backgroundColor: colorMappings.get(moodValue), backgroundImage: `url(${imageMappings.get(moodValue)})`}
+  const style={ backgroundColor: colorMappings.get(buttonValue), backgroundImage: `url(${imageMappings.get(buttonValue)})`}
   const handleClickRating = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if(!displayOnly)
-      setMood({...mood, value:moodValue});
+      setValue(buttonValue);
   };
   return (
-    <button onClick={handleClickRating} key={moodValue} value={moodValue} className={classStyle} style={style}>
+    <button onClick={handleClickRating} key={buttonValue} value={buttonValue} className={classStyle} style={style}>
     </button>
   );
 }

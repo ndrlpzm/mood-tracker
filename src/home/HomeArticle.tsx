@@ -31,22 +31,19 @@ function HomeArticle({ mood, colorMappings }: HomeArticleInput) {
         })}
       </span>
       <MoodValueButton
-        moodValue={mood.value}
-        mood={mood}
+        buttonValue={mood.value}
         isSelected={false}
-        setMood={setMoodPlaceholder}
+        setValue={setValuePlaceholder}
         displayOnly={true}
       ></MoodValueButton>
-      <TagDisplay
-        allowDelete={false}
-        mood={mood}
-        setMood={setMoodPlaceholder}
-      />
+      <TagDisplay tags={mood.tags} />
       {commentIcon}
     </article>
   );
 }
-const setMoodPlaceholder = function (value: SetStateAction<Mood>): void {
-  console.log("Unexpected mood state change");
+const setValuePlaceholder = function (
+  value: SetStateAction<number | undefined>
+): void {
+  console.log("Unexpected value state change");
 };
 export default HomeArticle;

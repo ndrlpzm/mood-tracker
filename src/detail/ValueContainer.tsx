@@ -15,8 +15,7 @@ function ValueContainer({ value, setValue }: ValueContainerInput) {
             key={i}
             buttonValue={i}
             setValue={setValue}
-            isSelected={value === i}
-            displayOnly={false}
+            isSelected={i === value}
           ></MoodValueButton>
         );
       })}

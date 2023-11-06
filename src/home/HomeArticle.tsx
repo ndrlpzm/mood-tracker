@@ -1,9 +1,8 @@
-import { SetStateAction } from "react";
 import { Mood } from "../data/classes/mood";
 import TagDisplay from "../common-components/TagDisplay";
 import messageImage from "../resources/message.png";
 import { useNavigate } from "react-router-dom";
-import MoodValueButton from "../common-components/MoodValueButton";
+import { MoodValue } from "../common-components/MoodValue";
 
 interface HomeArticleInput {
   mood: Mood;
@@ -30,20 +29,11 @@ function HomeArticle({ mood, colorMappings }: HomeArticleInput) {
           hour12: false,
         })}
       </span>
-      <MoodValueButton
-        buttonValue={mood.value}
-        isSelected={false}
-        setValue={setValuePlaceholder}
-        displayOnly={true}
-      ></MoodValueButton>
+      <MoodValue value={mood.value} />
       <TagDisplay tags={mood.tags} />
       {commentIcon}
     </article>
   );
 }
-const setValuePlaceholder = function (
-  value: SetStateAction<number | undefined>
-): void {
-  console.log("Unexpected value state change");
-};
+
 export default HomeArticle;

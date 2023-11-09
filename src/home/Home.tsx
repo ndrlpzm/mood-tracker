@@ -7,19 +7,20 @@ import HomeArticle from "./HomeArticle";
 import useSWR from "swr";
 import { returnLatestMoods } from "../data/apiMock";
 import { MoodsContext, MoodsDispatchContext } from "../data/moodReducer";
+import { useApi } from "../hooks/use-api";
 
 function Home() {
   const navigate = useNavigate();
   const moodList = useContext(MoodsContext);
   const dispatch = useContext(MoodsDispatchContext);
-  const { data, isLoading, isValidating } = useSWR("/moods", returnLatestMoods);
+  // const { data, isLoading, isValidating } = useSWR("/moods", returnLatestMoods);
+  const { data, isLoading, isValidating } = useApi("/moods", returnLatestMoods);
 
   useEffect(() => {
     if (!data) return;
     dispatch({
       type: "replace",
       mood: new Mood(-1, 0, new Date(), "", []),
-      moodIndex: -1,
       newList: data ?? [],
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

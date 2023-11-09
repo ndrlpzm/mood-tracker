@@ -31,6 +31,7 @@ export async function deleteMood(
 
 export async function returnLatestMoods() {
   //returns moods ordered by date-time
+  console.log("returnLatestMoods");
   await delay(1500);
   return returnLatestMoodsMock();
 }

@@ -12,13 +12,16 @@ export const MoodDetail = () => {
   const parsedMoodId = parseInt(moodId ?? "");
   const navigate = useNavigate();
 
-  const { data: mood, isLoading } = useSWR("/mood", (url) =>
-    retrieveMood(url, parsedMoodId)
-  );
+  const {
+    data: mood,
+    isLoading,
+    error,
+  } = useSWR("/mood", (url) => retrieveMood(url, parsedMoodId));
 
   if (isNaN(parsedMoodId)) return <div>error state - nan id</div>;
   if (!mood) return <div>error state - mood undefined</div>;
   if (isLoading) return <div>Loading</div>;
+  if (error) return <div>error from the api</div>;
 
   return (
     <div className="mood-detail">

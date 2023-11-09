@@ -6,7 +6,6 @@ export class MoodAction {
   constructor(
     public type: MoodActionType,
     public mood: Mood,
-    public moodIndex: number,
     public newList: Mood[]
   ) {}
 }

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import HomeArticle from "./HomeArticle";
 import useSWR from "swr";
 import { returnLatestMoods } from "../data/apiMock";
-import { MoodsContext, MoodsDispatchContext } from "../data/moodReducer";
+import { MoodsContext, MoodsDispatchContext } from "../data/moodContext";
 import { useApi } from "../hooks/use-api";
 
 function Home() {

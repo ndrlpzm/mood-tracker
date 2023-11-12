@@ -1,5 +1,4 @@
 import { Mood } from "./classes/mood";
-import { Tag } from "./classes/tag";
 import {
   addMoodMock,
   deleteMoodMock,

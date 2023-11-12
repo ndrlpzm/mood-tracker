@@ -109,3 +109,10 @@
   column-gap: 8px;
   row-gap: 8px;
 }
+/* TOAST */
+.toast-container {
+  width: 20dvw;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}

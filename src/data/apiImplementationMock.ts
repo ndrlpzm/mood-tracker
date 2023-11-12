@@ -34,6 +34,9 @@ export async function returnLatestMoodsMock() {
   };
   const orderedMoodList = storedMoodList.map((x) => x);
   orderedMoodList.sort(orderDatesDesc);
+  if (1 === 1) {
+    throw new Error("error");
+  }
   return orderedMoodList;
 }
 export function returnAvailableTagsMock(selectedTagIds: number[]) {

@@ -9,8 +9,8 @@ export function ToastComponent() {
     <div className="toast-container">
       {toastList.map((toast, i) => {
         return (
-          <div key={i} className="toast">
-            {toast.title}
+          <div key={i} className="toast error">
+            <h5 className="toast-title">{toast.title}</h5>
             {toast.content}
           </div>
         );
@@ -19,4 +19,4 @@ export function ToastComponent() {
   );
 }
 
-export default Toast;
+export default ToastComponent;

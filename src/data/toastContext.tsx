@@ -37,8 +37,11 @@ export function useCreateToast() {
       toast: toast,
     });
     setTimeout(() => {
-      dispatch({ type: "deleteFirst", toast: new Toast("", "") });
-    }, 2000);
+      dispatch({
+        type: "deleteFirst",
+        toast: new Toast("", "", "information"),
+      });
+    }, 5000);
   };
 }
 

@@ -4,11 +4,9 @@ import { useContext, useEffect } from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import HomeArticle from "./HomeArticle";
-import useSWR from "swr";
 import { returnLatestMoods } from "../data/apiMock";
 import { MoodsContext, MoodsDispatchContext } from "../data/moodContext";
 import { useApi } from "../hooks/use-api";
-import { cache as SWRCache } from "swr/_internal";
 
 function Home() {
   const navigate = useNavigate();
@@ -65,7 +63,7 @@ function Home() {
       <button
         className="new-mood-button fab-large"
         onClick={() => {
-          navigate("/mood/new");
+          navigate("/moods/new");
         }}
       >
         +

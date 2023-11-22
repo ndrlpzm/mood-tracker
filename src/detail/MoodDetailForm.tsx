@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Mood } from "../data/classes/mood";
 import ValueContainer from "./ValueContainer";
-import TagDisplay from "../common-components/TagDisplay";
 import TagSelector from "./TagSelector";
 import { Tag } from "../data/classes/tag";
 

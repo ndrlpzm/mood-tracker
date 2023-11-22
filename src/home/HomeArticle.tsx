@@ -3,7 +3,6 @@ import TagDisplay from "../common-components/TagDisplay";
 import messageImage from "../resources/message.png";
 import { useNavigate } from "react-router-dom";
 import { MoodValue } from "../common-components/MoodValue";
-import { cache as SWRCache } from "swr/_internal";
 
 interface HomeArticleInput {
   mood: Mood;
@@ -19,8 +18,7 @@ function HomeArticle({ mood, colorMappings }: HomeArticleInput) {
   }
   const loadMood = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    SWRCache.delete("/mood");
-    navigate(`/mood/${mood.id}`);
+    navigate(`/moods/${mood.id}`);
   };
   return (
     <article className="home-article" key={mood.id} onClick={loadMood}>

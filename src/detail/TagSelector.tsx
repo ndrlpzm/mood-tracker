@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { Tag } from "../data/classes/tag";
 import TagDisplay from "../common-components/TagDisplay";
 import { returnAvailableTags } from "../data/apiMock";
-import useSWRMutation from "swr/mutation";
-import { useApi, useApiMutation } from "../hooks/use-api";
+import { useApi } from "../hooks/use-api";
 import { formatParams } from "../http/utils";
 interface TagSelectorInput {
   tagList: Tag[] | undefined;

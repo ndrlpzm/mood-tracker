@@ -21,7 +21,7 @@ function App() {
           <main>
             <Routes>
               <Route path="/" element={<Home />}></Route>
-              <Route path="/mood/:moodId" element={<MoodDetail />}></Route>
+              <Route path="/moods/:moodId" element={<MoodDetail />}></Route>
             </Routes>
             <ToastComponent></ToastComponent>
           </main>

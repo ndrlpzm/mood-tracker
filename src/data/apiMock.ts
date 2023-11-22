@@ -7,9 +7,11 @@ import {
   returnLatestMoodsMock,
   updateMoodMock,
 } from "./apiImplementationMock.ts";
+import { Tag } from "./classes/tag.ts";
 
 export async function retrieveMood(url: string, id: number) {
   await delay(100);
+  console.log(`retrieve mood ${id}`);
   return retrieveMoodMock(url, id);
 }
 export async function addMood(url: string, mood: Mood) {
@@ -20,12 +22,10 @@ export async function updateMood(url: string, mood: Mood) {
   await delay(100);
   return updateMoodMock(url, mood);
 }
-export async function deleteMood(
-  url: string,
-  { arg }: { arg: { id: number } }
-): Promise<void> {
+export async function deleteMood(url: string): Promise<void> {
   await delay(100);
-  deleteMoodMock(url, arg.id);
+  const id = parseInt(url.split("/").pop() ?? "");
+  deleteMoodMock(url, id);
 }
 
 export async function returnLatestMoods() {
@@ -34,8 +34,8 @@ export async function returnLatestMoods() {
   await delay(1500);
   return returnLatestMoodsMock();
 }
-export function returnAvailableTags(selectedTagIds: number[]) {
-  return returnAvailableTagsMock(selectedTagIds);
+export function returnAvailableTags(url: string): Promise<Tag[]> {
+  return returnAvailableTagsMock(url);
 }
 
 function delay(ms: number) {

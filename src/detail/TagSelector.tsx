@@ -3,46 +3,56 @@ import { Tag } from "../data/classes/tag";
 import TagDisplay from "../common-components/TagDisplay";
 import { returnAvailableTags } from "../data/apiMock";
 import useSWRMutation from "swr/mutation";
-import { Mood } from "../data/classes/mood";
-
+import { useApi, useApiMutation } from "../hooks/use-api";
+import { formatParams } from "../http/utils";
 interface TagSelectorInput {
-  mood: Mood;
-  setMood: React.Dispatch<React.SetStateAction<Mood>>;
+  tagList: Tag[] | undefined;
+  setTagList: React.Dispatch<React.SetStateAction<Tag[] | undefined>>;
 }
-function TagSelector({ mood, setMood }: TagSelectorInput) {
+function TagSelector({ tagList, setTagList }: TagSelectorInput) {
+  console.log(tagList);
   const [showingAddTag, setShowingAddTag] = useState(false);
   const [remainingTagList, setRemainingTagList] = useState(new Array<Tag>());
-  const { trigger: triggerLoadTags, data: returnData } = useSWRMutation(
-    "/tags",
-    () =>
-      returnAvailableTags(
-        mood.tags.map((x) => {
-          return x.id;
-        })
-      )
+  const { data } = useApi(
+    showingAddTag
+      ? formatParams(
+          "/tags",
+          tagList
+            ? tagList.map((x) => {
+                return { key: "id", value: x.id };
+              })
+            : []
+        )
+      : null,
+    returnAvailableTags
   );
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     //loads available tags if they are currently hidden
-    if (!showingAddTag) triggerLoadTags();
+    // if (!showingAddTag)
+    //   trigger(
+    //     tagList?.map((x) => {
+    //       return x.id;
+    //     })
+    //   );
     setShowingAddTag(!showingAddTag);
   };
   const handleLiClick = (e: React.MouseEvent<HTMLLIElement>) => {
-    e.preventDefault();
-    const currElement: HTMLLIElement = e.currentTarget;
-    if (currElement.dataset.key !== undefined)
-      setMood({
-        ...mood,
-        tags: [
-          ...mood.tags,
-          remainingTagList[parseInt(currElement.dataset.key)],
-        ],
-      });
-    setShowingAddTag(!showingAddTag);
+    // e.preventDefault();
+    // const currElement: HTMLLIElement = e.currentTarget;
+    // if (currElement.dataset.key !== undefined)
+    //   setMood({
+    //     ...mood,
+    //     tags: [
+    //       ...mood.tags,
+    //       remainingTagList[parseInt(currElement.dataset.key)],
+    //     ],
+    //   });
+    // setShowingAddTag(!showingAddTag);
   };
   useEffect(() => {
-    if (returnData !== undefined) setRemainingTagList(returnData);
-  }, [returnData]);
+    if (data !== undefined) setRemainingTagList(data);
+  }, [data]);
   return (
     <>
       <div id="tag-heading-container">
@@ -62,7 +72,7 @@ function TagSelector({ mood, setMood }: TagSelectorInput) {
           })}
         </ul>
       )}
-      <TagDisplay tags={mood?.tags}></TagDisplay>
+      <TagDisplay tags={tagList}></TagDisplay>
     </>
   );
 }

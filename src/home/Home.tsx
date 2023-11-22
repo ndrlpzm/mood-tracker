@@ -8,12 +8,13 @@ import useSWR from "swr";
 import { returnLatestMoods } from "../data/apiMock";
 import { MoodsContext, MoodsDispatchContext } from "../data/moodContext";
 import { useApi } from "../hooks/use-api";
+import { cache as SWRCache } from "swr/_internal";
 
 function Home() {
   const navigate = useNavigate();
   const moodList = useContext(MoodsContext);
   const dispatch = useContext(MoodsDispatchContext);
-  // const { data, isLoading, isValidating } = useSWR("/moods", returnLatestMoods);
+
   const { data, isLoading, isValidating } = useApi("/moods", returnLatestMoods);
 
   useEffect(() => {

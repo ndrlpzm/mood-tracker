@@ -1,3 +1,4 @@
+import { unravelParams } from "../http/utils";
 import { Mood } from "./classes/mood";
 import { Tag } from "./classes/tag";
 
@@ -34,13 +35,14 @@ export async function returnLatestMoodsMock() {
   };
   const orderedMoodList = storedMoodList.map((x) => x);
   orderedMoodList.sort(orderDatesDesc);
-  if (1 === 1) {
-    throw new Error("error");
-  }
   return orderedMoodList;
 }
-export function returnAvailableTagsMock(selectedTagIds: number[]) {
-  return storedTagList.filter((x) => !selectedTagIds.includes(x.id));
+export async function returnAvailableTagsMock(url: string): Promise<Tag[]> {
+  const params = unravelParams(url);
+  if (!params) return storedTagList;
+  else {
+    return storedTagList.filter((x) => !params.includes(x.id.toString()));
+  }
 }
 /*------------------------------------------------------------------- */
 const now = new Date();

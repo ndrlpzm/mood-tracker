@@ -4,7 +4,6 @@ import { useToastContext } from "../data/toastContext.tsx";
 export function ToastComponent() {
   const toastList = useToastContext();
 
-  console.log("painting");
   return (
     <div className="toast-container">
       {toastList.map((toast, i) => {

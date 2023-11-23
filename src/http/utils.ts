@@ -14,8 +14,11 @@ export const formatParams = (path: string, params: QueryParams): string => {
  * @returns
  */
 export const unravelParams = (fullPath: string): string[] | undefined => {
+  if (!fullPath.includes("?")) return undefined;
+
   const paramString = fullPath.split("?").pop();
   const paramArray = paramString?.split("&");
+
   if (paramArray)
     return paramArray?.map((x) => {
       return x.split("=")[1].toString();

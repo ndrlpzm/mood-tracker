@@ -3,7 +3,7 @@ import { Tag } from "../data/classes/tag";
 import TagDisplay from "../common-components/TagDisplay";
 import { returnAvailableTags } from "../data/apiMock";
 import { useApi } from "../hooks/use-api";
-import { formatParams } from "../http/utils";
+import { QueryParams, formatParams } from "../http/utils";
 interface TagSelectorInput {
   tagList: Tag[] | undefined;
   setTagList: React.Dispatch<React.SetStateAction<Tag[] | undefined>>;
@@ -12,42 +12,32 @@ function TagSelector({ tagList, setTagList }: TagSelectorInput) {
   console.log(tagList);
   const [showingAddTag, setShowingAddTag] = useState(false);
   const [remainingTagList, setRemainingTagList] = useState(new Array<Tag>());
+
+  const tagQueryParams: QueryParams =
+    tagList?.map((x) => {
+      return { key: "id", value: x.id };
+    }) ?? [];
   const { data } = useApi(
-    showingAddTag
-      ? formatParams(
-          "/tags",
-          tagList
-            ? tagList.map((x) => {
-                return { key: "id", value: x.id };
-              })
-            : []
-        )
-      : null,
+    showingAddTag ? formatParams("/tags", tagQueryParams) : null,
     returnAvailableTags
   );
+
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    //loads available tags if they are currently hidden
-    // if (!showingAddTag)
-    //   trigger(
-    //     tagList?.map((x) => {
-    //       return x.id;
-    //     })
-    //   );
+
     setShowingAddTag(!showingAddTag);
   };
   const handleLiClick = (e: React.MouseEvent<HTMLLIElement>) => {
-    // e.preventDefault();
-    // const currElement: HTMLLIElement = e.currentTarget;
-    // if (currElement.dataset.key !== undefined)
-    //   setMood({
-    //     ...mood,
-    //     tags: [
-    //       ...mood.tags,
-    //       remainingTagList[parseInt(currElement.dataset.key)],
-    //     ],
-    //   });
-    // setShowingAddTag(!showingAddTag);
+    e.preventDefault();
+    const currElement: HTMLLIElement = e.currentTarget;
+    if (currElement.dataset.key !== undefined)
+      tagList
+        ? setTagList([
+            ...tagList,
+            remainingTagList[parseInt(currElement.dataset.key)],
+          ])
+        : setTagList([remainingTagList[parseInt(currElement.dataset.key)]]);
+    setShowingAddTag(!showingAddTag);
   };
   useEffect(() => {
     if (data !== undefined) setRemainingTagList(data);

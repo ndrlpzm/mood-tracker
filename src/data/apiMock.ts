@@ -35,6 +35,7 @@ export async function returnLatestMoods() {
   return returnLatestMoodsMock();
 }
 export function returnAvailableTags(url: string): Promise<Tag[]> {
+  console.log("api call");
   return returnAvailableTagsMock(url);
 }
 

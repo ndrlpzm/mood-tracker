@@ -1,7 +1,6 @@
 export type QueryParams = { key: string; value: any }[];
 
 export const formatParams = (path: string, params: QueryParams): string => {
-  console.log(params);
   if (params.length > 0) {
     const paramArray = params.map((x) => `${x.key}=${x.value}`);
     return `${path}?${paramArray.join("&")}`;

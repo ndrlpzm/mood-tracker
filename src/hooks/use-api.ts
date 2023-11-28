@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import useSWR from "swr";
 import { useCreateToast } from "../data/toastContext";
 import { Toast } from "../data/classes/toast";
-import useSWRMutation from "swr/mutation";
+import useSWRMutation, { SWRMutationConfiguration } from "swr/mutation";
 
 export const useApi = <Tpayload>(
   path: string | null,
@@ -28,10 +28,15 @@ export const useApi = <Tpayload>(
 
 export const useApiMutation = <Tpayload>(
   path: string,
-  func: (path: string) => Promise<Tpayload>
+  func: (path: string) => Promise<Tpayload>,
+  options?: SWRMutationConfiguration<any, any> | undefined
 ) => {
   const setToast = useCreateToast();
-  const { trigger, isMutating, data, error } = useSWRMutation(path, func);
+  const { trigger, isMutating, data, error } = useSWRMutation(
+    path,
+    func,
+    options
+  );
 
   useEffect(() => {
     if (error)

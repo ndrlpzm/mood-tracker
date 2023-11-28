@@ -3,17 +3,17 @@ import { MoodValue } from "./MoodValue";
 
 interface MoodValueButtonInput {
   buttonValue: number;
-  setValue: React.Dispatch<React.SetStateAction<number | undefined>>;
+  callbackFn: Function;
   isSelected: boolean;
 }
 function MoodValueButton({
   buttonValue,
-  setValue,
+  callbackFn: setValueCb,
   isSelected,
 }: MoodValueButtonInput) {
   const handleClickRating = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setValue(buttonValue);
+    setValueCb(buttonValue);
   };
   return (
     <button

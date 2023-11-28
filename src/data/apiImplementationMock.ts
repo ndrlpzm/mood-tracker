@@ -21,7 +21,7 @@ export async function updateMoodMock(url: string, mood: Mood) {
     if (x.id === mood.id) return mood;
     else return x;
   });
-  return storedMoodList;
+  return mood;
 }
 export async function deleteMoodMock(url: string, id: number): Promise<void> {
   // const index = storedMoodList.indexOf(mood);

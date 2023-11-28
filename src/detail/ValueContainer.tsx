@@ -2,9 +2,9 @@ import React from "react";
 import MoodValueButton from "../common-components/MoodValueButton";
 interface ValueContainerInput {
   value: number | undefined;
-  setValue: React.Dispatch<React.SetStateAction<number | undefined>>;
+  callbackFn: Function;
 }
-function ValueContainer({ value, setValue }: ValueContainerInput) {
+function ValueContainer({ value, callbackFn }: ValueContainerInput) {
   const ratings: number[] = [1, 2, 3, 4, 5];
 
   return (
@@ -14,7 +14,7 @@ function ValueContainer({ value, setValue }: ValueContainerInput) {
           <MoodValueButton
             key={i}
             buttonValue={i}
-            setValue={setValue}
+            callbackFn={callbackFn}
             isSelected={i === value}
           ></MoodValueButton>
         );

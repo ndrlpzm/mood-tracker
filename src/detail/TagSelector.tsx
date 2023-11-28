@@ -6,9 +6,9 @@ import { useApi } from "../hooks/use-api";
 import { QueryParams, formatParams } from "../http/utils";
 interface TagSelectorInput {
   tagList: Tag[] | undefined;
-  setTagList: React.Dispatch<React.SetStateAction<Tag[] | undefined>>;
+  callbackFn: Function;
 }
-function TagSelector({ tagList, setTagList }: TagSelectorInput) {
+function TagSelector({ tagList, callbackFn: setTagCb }: TagSelectorInput) {
   const [showingAddTag, setShowingAddTag] = useState(false);
   const [remainingTagList, setRemainingTagList] = useState(new Array<Tag>());
 
@@ -31,10 +31,11 @@ function TagSelector({ tagList, setTagList }: TagSelectorInput) {
     setShowingAddTag(!showingAddTag);
   };
   const addClickedTag = (clickedTag: string | undefined) => {
-    if (clickedTag !== undefined)
+    if (clickedTag !== undefined) {
       tagList
-        ? setTagList([...tagList, remainingTagList[parseInt(clickedTag)]])
-        : setTagList([remainingTagList[parseInt(clickedTag)]]);
+        ? setTagCb([...tagList, remainingTagList[parseInt(clickedTag)]])
+        : setTagCb([remainingTagList[parseInt(clickedTag)]]);
+    }
   };
   useEffect(() => {
     if (data) setRemainingTagList(data);

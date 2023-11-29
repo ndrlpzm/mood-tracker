@@ -20,10 +20,12 @@ export function MoodDetailForm({
   triggerFn,
   triggerCallback,
 }: MoodDetailFormInput) {
-  console.log(mood);
   const { trigger, data, error } = useApiMutation(triggerUrl, (url) =>
     triggerFn(url, mood)
   );
+  useEffect(() => {
+    if (triggerCallback && data && !error) triggerCallback(data);
+  }, [data, triggerCallback, error]);
 
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,6 +33,7 @@ export function MoodDetailForm({
     console.log(mood);
     trigger({ ...mood });
   };
+  //controlled component handling
   const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (mood)
       setMood({
@@ -52,9 +55,6 @@ export function MoodDetailForm({
         value: selValue,
       });
   };
-  useEffect(() => {
-    if (triggerCallback && data && !error) triggerCallback(data);
-  }, [data, triggerCallback, error]);
   return (
     <form onSubmit={handleSubmit}>
       <ValueContainer value={mood.value} callbackFn={valueCallback} />

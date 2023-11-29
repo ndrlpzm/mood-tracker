@@ -31,6 +31,7 @@ export async function updateMood(
 }
 export async function deleteMood(url: string): Promise<void> {
   const id = parseInt(url.split("/").pop() ?? "");
+  console.log(id);
   deleteMoodMock(url, id);
 }
 

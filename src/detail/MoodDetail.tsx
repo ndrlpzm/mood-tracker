@@ -24,10 +24,10 @@ export const MoodDetail = () => {
   }, [data]);
 
   if (isNaN(parsedMoodId)) return <div>error state - nan id</div>;
-  //if (!mood) return <div>error state - mood undefined</div>;
   if (isLoading) return <div>Loading</div>;
   if (isValidating) return <div>Loading</div>;
   //if (error) return <div>error from the api</div>;
+
   return (
     <div className="mood-detail">
       <nav>
@@ -41,18 +41,17 @@ export const MoodDetail = () => {
           ></IconButton>
         </div>
         <div className="nav-right">
-          <DeleteButton id={mood?.id}></DeleteButton>
+          <DeleteButton id={mood.id}></DeleteButton>
         </div>
       </nav>
       <article>
-        {mood && (
-          <MoodDetailForm
-            mood={mood}
-            setMood={setMood}
-            triggerUrl={`/moods/${mood.id}`}
-            triggerFn={updateMood}
-          ></MoodDetailForm>
-        )}
+        <MoodDetailForm
+          mood={mood}
+          setMood={setMood}
+          triggerUrl={`/moods/${mood.id}`}
+          triggerFn={updateMood}
+          triggerCallback={undefined}
+        ></MoodDetailForm>
       </article>
     </div>
   );

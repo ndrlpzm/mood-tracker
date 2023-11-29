@@ -9,6 +9,9 @@ import { addMood } from "../data/apiMock";
 export const NewMood = () => {
   const [mood, setMood] = useState<Mood>(new Mood(-1, 0, new Date(), "", []));
   const navigate = useNavigate();
+  const apiCallback = (data: Mood) => {
+    navigate(`/moods/${data.id}`);
+  };
   return (
     <div className="mood-detail">
       <nav>
@@ -28,6 +31,7 @@ export const NewMood = () => {
           setMood={setMood}
           triggerUrl="/moods"
           triggerFn={addMood}
+          triggerCallback={apiCallback}
         ></MoodDetailForm>
       </article>
     </div>

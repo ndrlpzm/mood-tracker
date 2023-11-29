@@ -11,6 +11,7 @@ export type MoodDetailFormInput = {
   setMood: React.Dispatch<React.SetStateAction<Mood>>;
   triggerUrl: string;
   triggerFn: Function;
+  triggerCallback: Function | undefined;
 };
 
 export function MoodDetailForm({
@@ -18,11 +19,12 @@ export function MoodDetailForm({
   setMood,
   triggerUrl,
   triggerFn,
+  triggerCallback,
 }: MoodDetailFormInput) {
   console.log(mood);
-  const [moodValue, setMoodValue] = useState<number | undefined>(mood?.value);
-  const [tagList, setTagList] = useState<Tag[] | undefined>(mood?.tags);
-  const { trigger } = useApiMutation(triggerUrl, (url) => triggerFn(url, mood));
+  const { trigger, data, error } = useApiMutation(triggerUrl, (url) =>
+    triggerFn(url, mood)
+  );
 
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,12 +39,6 @@ export function MoodDetailForm({
         comment: e.currentTarget.value,
       });
   };
-  useEffect(() => {
-    if (mood) {
-      setTagList(mood?.tags);
-      setMoodValue(mood?.value);
-    }
-  }, [mood]);
   const tagCallback = (tagArr: Tag[]) => {
     if (mood)
       setMood({
@@ -57,6 +53,9 @@ export function MoodDetailForm({
         value: selValue,
       });
   };
+  useEffect(() => {
+    if (triggerCallback && data && !error) triggerCallback(data);
+  }, [data, triggerCallback, error]);
   return (
     <form onSubmit={handleSubmit}>
       <ValueContainer value={mood.value} callbackFn={valueCallback} />

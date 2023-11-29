@@ -46,8 +46,8 @@ export const useApiMutation = <Tpayload>(
   }, [error, setToast]);
 
   if (error) {
-    return { trigger, isMutating, data };
+    return { trigger, isMutating, data, error };
   }
 
-  return { trigger, isMutating, data };
+  return { trigger, isMutating, data, error };
 };

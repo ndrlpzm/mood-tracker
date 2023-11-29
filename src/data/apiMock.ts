@@ -18,7 +18,6 @@ export async function addMood(
   url: string,
   mood: Mood | undefined
 ): Promise<Mood> {
-  await delay(100);
   console.log("add");
   if (!mood) throw new Error("Undefined data");
   return addMoodMock(url, mood);
@@ -27,21 +26,17 @@ export async function updateMood(
   url: string,
   mood: Mood | undefined
 ): Promise<Mood> {
-  await delay(100);
   console.log("update");
-  console.log(mood);
   if (!mood) throw new Error("Undefined data");
   return updateMoodMock(url, mood);
 }
 export async function deleteMood(url: string): Promise<void> {
-  await delay(100);
   const id = parseInt(url.split("/").pop() ?? "");
   deleteMoodMock(url, id);
 }
 
 export async function returnLatestMoods() {
   //returns moods ordered by date-time
-  console.log("returnLatestMoods");
   await delay(1500);
   return returnLatestMoodsMock();
 }

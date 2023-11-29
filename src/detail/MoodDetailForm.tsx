@@ -1,10 +1,9 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { Mood } from "../data/classes/mood";
 import ValueContainer from "./ValueContainer";
 import TagSelector from "./TagSelector";
 import { Tag } from "../data/classes/tag";
 import { useApiMutation } from "../hooks/use-api";
-import { addMood, updateMood } from "../data/apiMock";
 
 export type MoodDetailFormInput = {
   mood: Mood;

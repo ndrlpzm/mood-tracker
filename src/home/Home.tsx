@@ -1,28 +1,21 @@
 import ClipLoader from "react-spinners/ClipLoader";
 import { Mood } from "../data/classes/mood";
-import { useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import HomeArticle from "./HomeArticle";
 import { returnLatestMoods } from "../data/apiMock";
-import { MoodsContext, MoodsDispatchContext } from "../data/moodContext";
 import { useApi } from "../hooks/use-api";
 
 function Home() {
   const navigate = useNavigate();
-  const moodList = useContext(MoodsContext);
-  const dispatch = useContext(MoodsDispatchContext);
+  const [moodList, setMoodList] = useState<Mood[]>([]);
 
   const { data, isLoading, isValidating } = useApi("/moods", returnLatestMoods);
 
   useEffect(() => {
     if (!data) return;
-    dispatch({
-      type: "replace",
-      mood: new Mood(-1, 0, new Date(), "", []),
-      newList: data ?? [],
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setMoodList(data);
   }, [data]);
   const formattedData = () => {
     var colorMappings = retrieveIconColors();

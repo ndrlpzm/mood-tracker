@@ -1,6 +1,5 @@
 import IconButton from "../common-components/IconButton";
 import xIcon from "../resources/icons8-x-50.png";
-import useSWRMutation from "swr/mutation";
 import { useApiMutation } from "../hooks/use-api";
 import { deleteMood } from "../data/apiMock";
 import { useNavigate } from "react-router-dom";
@@ -11,15 +10,17 @@ interface DeleteButtonInput {
 export function DeleteButton({ id }: DeleteButtonInput) {
   const navigate = useNavigate();
 
-  const { trigger, isMutating, data } = useApiMutation(
-    `/moods/${id}`,
-    deleteMood
-  );
+  const { trigger } = useApiMutation(`/moods/${id}`, deleteMood, {
+    onSuccess: () => {
+      console.log("onSuccess");
+      navigate("/");
+    },
+  });
 
   if (!id) return <div>undefined id~</div>;
-  const callBack = async () => {
-    await trigger();
-    navigate(-1);
+  const callBack = () => {
+    //TODO: add confirmation prompt
+    trigger();
   };
 
   return (

@@ -1,35 +1,32 @@
 import ClipLoader from "react-spinners/ClipLoader";
 import { Mood } from "../data/classes/mood";
-import { useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import HomeArticle from "./HomeArticle";
-import useSWR from "swr";
 import { returnLatestMoods } from "../data/apiMock";
-import { MoodsContext, MoodsDispatchContext } from "../data/moodReducer";
+import { useApi } from "../hooks/use-api";
 
 function Home() {
   const navigate = useNavigate();
-  const moodList=useContext(MoodsContext);
-  const dispatch=useContext(MoodsDispatchContext);
-  const { data, isLoading } = useSWR("/moods", returnLatestMoods);
+  const [moodList, setMoodList] = useState<Mood[]>([]);
+
+  const { data, isLoading, isValidating } = useApi("/moods", returnLatestMoods);
 
   useEffect(() => {
-    if(!data) return;
-      dispatch({
-        type: "replace",
-        mood: new Mood(-1,0,new Date(),"",[]),
-        moodIndex: -1,
-        newList: data ?? [],
-      });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (!data) return;
+    setMoodList(data);
   }, [data]);
   const formattedData = () => {
     var colorMappings = retrieveIconColors();
     var prevDate: string;
     const formattedElements = moodList.map((mood) => {
       const art: JSX.Element = (
-        <HomeArticle key={mood.id} mood={mood} colorMappings={colorMappings}></HomeArticle>
+        <HomeArticle
+          key={mood.id}
+          mood={mood}
+          colorMappings={colorMappings}
+        ></HomeArticle>
       );
       if (prevDate !== mood.date.toLocaleDateString()) {
         prevDate = mood.date.toLocaleDateString();
@@ -47,7 +44,7 @@ function Home() {
   };
   return (
     <div className="home">
-      {isLoading ? (
+      {isLoading || isValidating ? (
         <ClipLoader
           size={50}
           aria-label="Loading Spinner"
@@ -59,7 +56,7 @@ function Home() {
       <button
         className="new-mood-button fab-large"
         onClick={() => {
-          navigate("/mood/new");
+          navigate("/moods/new");
         }}
       >
         +

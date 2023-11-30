@@ -1,5 +1,4 @@
 import { Mood } from "./classes/mood";
-import { Tag } from "./classes/tag";
 import {
   addMoodMock,
   deleteMoodMock,
@@ -8,22 +7,32 @@ import {
   returnLatestMoodsMock,
   updateMoodMock,
 } from "./apiImplementationMock.ts";
+import { Tag } from "./classes/tag.ts";
 
 export async function retrieveMood(url: string, id: number) {
-  await delay(100);
+  //console.log(`retrieve mood ${id}`);
   return retrieveMoodMock(url, id);
 }
-export async function addMood(url: string, mood: Mood) {
-  await delay(100);
+export async function addMood(
+  url: string,
+  mood: Mood | undefined
+): Promise<Mood> {
+  //console.log("add");
+  if (!mood) throw new Error("Undefined data");
   return addMoodMock(url, mood);
 }
-export async function updateMood(url: string, mood: Mood) {
-  await delay(100);
+export async function updateMood(
+  url: string,
+  mood: Mood | undefined
+): Promise<Mood> {
+  //console.log("update");
+  if (!mood) throw new Error("Undefined data");
   return updateMoodMock(url, mood);
 }
-export async function deleteMood(url: string, id: number) {
-  await delay(100);
-  return deleteMoodMock(url, id);
+export async function deleteMood(url: string): Promise<void> {
+  const id = parseInt(url.split("/").pop() ?? "");
+  console.log(id);
+  deleteMoodMock(url, id);
 }
 
 export async function returnLatestMoods() {
@@ -31,8 +40,9 @@ export async function returnLatestMoods() {
   await delay(1500);
   return returnLatestMoodsMock();
 }
-export function returnAvailableTags(selectedTagIds: number[]) {
-  return returnAvailableTagsMock(selectedTagIds);
+export function returnAvailableTags(url: string): Promise<Tag[]> {
+  //console.log("api call");
+  return returnAvailableTagsMock(url);
 }
 
 function delay(ms: number) {

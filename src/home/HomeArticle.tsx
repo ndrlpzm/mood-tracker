@@ -1,9 +1,8 @@
-import { SetStateAction } from "react";
 import { Mood } from "../data/classes/mood";
 import TagDisplay from "../common-components/TagDisplay";
 import messageImage from "../resources/message.png";
 import { useNavigate } from "react-router-dom";
-import MoodValueButton from "../common-components/MoodValueButton";
+import { MoodValue } from "../common-components/MoodValue";
 
 interface HomeArticleInput {
   mood: Mood;
@@ -19,7 +18,7 @@ function HomeArticle({ mood, colorMappings }: HomeArticleInput) {
   }
   const loadMood = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate(`/mood/${mood.id}`);
+    navigate(`/moods/${mood.id}`);
   };
   return (
     <article className="home-article" key={mood.id} onClick={loadMood}>
@@ -30,23 +29,11 @@ function HomeArticle({ mood, colorMappings }: HomeArticleInput) {
           hour12: false,
         })}
       </span>
-      <MoodValueButton
-        moodValue={mood.value}
-        mood={mood}
-        isSelected={false}
-        setMood={setMoodPlaceholder}
-        displayOnly={true}
-      ></MoodValueButton>
-      <TagDisplay
-        allowDelete={false}
-        mood={mood}
-        setMood={setMoodPlaceholder}
-      />
+      <MoodValue value={mood.value} />
+      <TagDisplay tags={mood.tags} />
       {commentIcon}
     </article>
   );
 }
-const setMoodPlaceholder = function (value: SetStateAction<Mood>): void {
-  console.log("Unexpected mood state change");
-};
+
 export default HomeArticle;

@@ -4,7 +4,7 @@ import { MoodDetailForm } from "./MoodDetailForm";
 import "./MoodDetail.css";
 import DeleteButton from "./DeleteButton";
 import IconButton from "../common-components/IconButton";
-import leftArrowIcon from "../resources/icons8-chevron-left-50.png";
+import homeIcon from "../resources/icons8-home-50.png";
 import { useApi } from "../hooks/use-api";
 import { useEffect, useState } from "react";
 import { Mood } from "../data/classes/mood";
@@ -26,16 +26,15 @@ export const MoodDetail = () => {
   if (isNaN(parsedMoodId)) return <div>error state - nan id</div>;
   if (isLoading) return <div>Loading</div>;
   if (isValidating) return <div>Loading</div>;
-  //if (error) return <div>error from the api</div>;
 
   return (
     <div className="mood-detail">
       <nav>
         <div className="nav-left">
           <IconButton
-            displayImg={leftArrowIcon}
+            displayImg={homeIcon}
             callbackFunction={() => {
-              navigate(-1);
+              navigate("/");
             }}
             description="Back"
           ></IconButton>

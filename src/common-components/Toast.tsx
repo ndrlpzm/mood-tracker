@@ -1,4 +1,3 @@
-import { Toast } from "../data/classes/toast.ts";
 import { useToastContext } from "../data/toastContext.tsx";
 
 export function ToastComponent() {

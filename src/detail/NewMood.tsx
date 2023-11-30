@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mood } from "../data/classes/mood";
 import IconButton from "../common-components/IconButton";
-import leftArrowIcon from "../resources/icons8-chevron-left-50.png";
+import homeIcon from "../resources/icons8-home-50.png";
 import MoodDetailForm from "./MoodDetailForm";
 import { addMood } from "../data/apiMock";
 
@@ -17,7 +17,7 @@ export const NewMood = () => {
       <nav>
         <div className="nav-left">
           <IconButton
-            displayImg={leftArrowIcon}
+            displayImg={homeIcon}
             callbackFunction={() => {
               navigate("/");
             }}
